@@ -1150,6 +1150,27 @@ module ibex_core import ibex_pkg::*; #(
     .div_wait_i                 (perf_div_wait)
   );
 
+`ifdef SIMULATION_CPI_TRACING
+  ibex_cpi_tracer u_cpi_tracer (
+    .clk_i,
+    .rst_ni,
+    
+    .inhibit(cs_registers_i.mcountinhibit[31]),
+
+    .mispredict_i(nt_branch_mispredict),
+    .iside_wait_i(perf_iside_wait),
+    .alu_req_i(instr_first_cycle_id),
+    .mul_req_i(mult_en_ex),
+    .div_req_i(div_en_ex),
+    .lsu_req_i(lsu_req),
+    
+    .instr_ret_i(perf_instr_ret_wb),
+    .dside_wait_i(perf_dside_wait),
+    .mul_wait_i(perf_mul_wait),
+    .div_wait_i(perf_div_wait)
+  );
+`endif
+
   // These assertions are in top-level as instr_valid_id required as the enable term
   `ASSERT(IbexCsrOpValid, instr_valid_id |-> csr_op inside {
       CSR_OP_READ,
