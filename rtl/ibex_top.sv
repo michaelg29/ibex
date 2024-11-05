@@ -252,17 +252,17 @@ module ibex_top import ibex_pkg::*; #(
   ////////////////////////
 
   // Buffer security critical signals to prevent synthesis optimisation removing them
-  prim_buf #(.Width($bits(ibex_mubi_t))) u_fetch_enable_buf (
+  prim_generic_buf #(.Width($bits(ibex_mubi_t))) u_fetch_enable_buf (
     .in_i (fetch_enable_i),
     .out_o(fetch_enable_buf)
   );
 
-  prim_buf #(.Width(RegFileDataWidth)) u_rf_rdata_a_ecc_buf (
+  prim_generic_buf #(.Width(RegFileDataWidth)) u_rf_rdata_a_ecc_buf (
     .in_i (rf_rdata_a_ecc),
     .out_o(rf_rdata_a_ecc_buf)
   );
 
-  prim_buf #(.Width(RegFileDataWidth)) u_rf_rdata_b_ecc_buf (
+  prim_generic_buf #(.Width(RegFileDataWidth)) u_rf_rdata_b_ecc_buf (
     .in_i (rf_rdata_b_ecc),
     .out_o(rf_rdata_b_ecc_buf)
   );
@@ -543,7 +543,8 @@ module ibex_top import ibex_pkg::*; #(
 
   end else begin : gen_noscramble
 
-    logic unused_scramble_inputs = scramble_key_valid_i & (|scramble_key_i) & (|RndCnstIbexKey) &
+    logic unused_scramble_inputs;
+    assign unused_scramble_inputs = scramble_key_valid_i & (|scramble_key_i) & (|RndCnstIbexKey) &
                                    (|scramble_nonce_i) & (|RndCnstIbexNonce) & scramble_req_q &
                                    ic_scr_key_req & scramble_key_valid_d & scramble_req_d;
 
@@ -676,7 +677,7 @@ module ibex_top import ibex_pkg::*; #(
       end else begin : gen_noscramble_rams
 
         // Tag RAM instantiation
-        prim_ram_1p #(
+        prim_generic_ram_1p #(
           .Width            (TagSizeECC),
           .Depth            (IC_NUM_LINES),
           .DataBitsPerMask  (TagSizeECC)
@@ -695,7 +696,7 @@ module ibex_top import ibex_pkg::*; #(
         );
 
         // Data RAM instantiation
-        prim_ram_1p #(
+        prim_generic_ram_1p #(
           .Width              (LineSizeECC),
           .Depth              (IC_NUM_LINES),
           .DataBitsPerMask    (LineSizeECC)
@@ -740,7 +741,7 @@ module ibex_top import ibex_pkg::*; #(
   assign data_wdata_o = data_wdata_core[31:0];
 
   if (MemECC) begin : gen_mem_wdata_ecc
-    prim_buf #(.Width(7)) u_prim_buf_data_wdata_intg (
+    prim_generic_buf #(.Width(7)) u_prim_buf_data_wdata_intg (
       .in_i (data_wdata_core[38:32]),
       .out_o(data_wdata_intg_o)
     );
@@ -965,7 +966,7 @@ module ibex_top import ibex_pkg::*; #(
     } = buf_out;
 
     // Manually buffer all input signals.
-    prim_buf #(.Width(NumBufferBits)) u_signals_prim_buf (
+    prim_generic_buf #(.Width(NumBufferBits)) u_signals_prim_buf (
       .in_i(buf_in),
       .out_o(buf_out)
     );
@@ -973,11 +974,11 @@ module ibex_top import ibex_pkg::*; #(
     logic [TagSizeECC-1:0]  ic_tag_rdata_local [IC_NUM_WAYS];
     logic [LineSizeECC-1:0] ic_data_rdata_local [IC_NUM_WAYS];
     for (genvar k = 0; k < IC_NUM_WAYS; k++) begin : gen_ways
-      prim_buf #(.Width(TagSizeECC)) u_tag_prim_buf (
+      prim_generic_buf #(.Width(TagSizeECC)) u_tag_prim_buf (
         .in_i(ic_tag_rdata[k]),
         .out_o(ic_tag_rdata_local[k])
       );
-      prim_buf #(.Width(LineSizeECC)) u_data_prim_buf (
+      prim_generic_buf #(.Width(LineSizeECC)) u_data_prim_buf (
         .in_i(ic_data_rdata[k]),
         .out_o(ic_data_rdata_local[k])
       );
@@ -1085,17 +1086,17 @@ module ibex_top import ibex_pkg::*; #(
       .scan_rst_ni            (scan_rst_ni)
     );
 
-    prim_buf u_prim_buf_alert_minor (
+    prim_generic_buf u_prim_buf_alert_minor (
       .in_i (lockstep_alert_minor_local),
       .out_o(lockstep_alert_minor)
     );
 
-    prim_buf u_prim_buf_alert_major_internal (
+    prim_generic_buf u_prim_buf_alert_major_internal (
       .in_i (lockstep_alert_major_internal_local),
       .out_o(lockstep_alert_major_internal)
     );
 
-    prim_buf u_prim_buf_alert_major_bus (
+    prim_generic_buf u_prim_buf_alert_major_bus (
       .in_i (lockstep_alert_major_bus_local),
       .out_o(lockstep_alert_major_bus)
     );
