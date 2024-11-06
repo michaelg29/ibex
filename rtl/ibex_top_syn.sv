@@ -6,11 +6,19 @@
  * Top level module of the ibex RISC-V core for synthesis
  */
 
+// overridable defines
 `ifndef DM_HALT_ADDR
   `define DM_HALT_ADDR 32'h1A110800
 `endif
 `ifndef DM_EXCEPTION_ADDR
   `define DM_EXCEPTION_ADDR 32'h1A110808
+`endif
+
+// register file type
+`ifdef VERILATOR
+  `define IBEX_RF_TYPE ibex_pkg::RegFileFF
+`else
+  `define IBEX_RF_TYPE ibex_pkg::RegFileLatch
 `endif
 
 module ibex_top_syn (
@@ -78,7 +86,7 @@ module ibex_top_syn (
     .RV32E            ( 1'b0                             ),
     .RV32M            ( ibex_pkg::RV32MFast              ),
     .RV32B            ( ibex_pkg::RV32BNone              ),
-    .RegFile          ( ibex_pkg::RegFileLatch           ),
+    .RegFile          ( `IBEX_RF_TYPE                    ),
     .BranchTargetALU  ( 1'b0                             ),
     .ICache           ( 1'b1                             ),
     .ICacheECC        ( 1'b0                             ),

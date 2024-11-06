@@ -31,10 +31,12 @@ module ibex_cpi_tracer (
   // imports
   import ibex_tracer_pkg::*;
 
+`ifdef VERILATOR
   // logging variables
-  // int          file_handle;
-  // string       file_name;
-  // logic trace_log_enable;
+  int          file_handle;
+  string       file_name;
+  logic trace_log_enable;
+`endif
 
   // signals
   logic mul_wait_prev;
@@ -57,36 +59,42 @@ module ibex_cpi_tracer (
   logic [N_LANES-1:0] ex_comp;
   logic [N_LANES-1:0] dependency_comp;
 
+`ifdef VERILATOR
   // initial values
-  // initial begin
-    // file_handle = 0;
+  initial begin
+    file_handle = 0;
 
-    // if ($value$plusargs("ibex_tracer_enable=%b", trace_log_enable)) begin
-      // if (trace_log_enable == 1'b0) begin
-        // $display("%m: Instruction trace disabled.");
-      // end
-    // end else begin
-      // trace_log_enable = 1'b1;
-    // end
-  // end
+    if ($value$plusargs("ibex_tracer_enable=%b", trace_log_enable)) begin
+      if (trace_log_enable == 1'b0) begin
+        $display("%m: Instruction trace disabled.");
+      end
+    end else begin
+      trace_log_enable = 1'b1;
+    end
+  end
+`endif
 
   // =============================
   // ===== UTILITY FUNCTIONS =====
   // =============================
 
+`ifdef VERILATOR
   // print information at a rising edge
   function automatic void printbuffer_dumpline(int fh);
     // TODO: write trace for a cycle
-    // $fwrite(fh, "\n");
+    $fwrite(fh, "\n");
   endfunction
+`endif
 
+`ifdef VERILATOR
   // close output file for writing
-  // final begin
-    // if (file_handle != 32'h0) begin
-      // int fh = file_handle;
-      // $fclose(fh);
-    // end
-  // end
+  final begin
+    if (file_handle != 32'h0) begin
+      int fh = file_handle;
+      $fclose(fh);
+    end
+  end
+`endif
 
   // =========================
   // ===== TRACING LOGIC =====
@@ -134,28 +142,30 @@ module ibex_cpi_tracer (
     end
   endgenerate
 
+`ifdef VERILATOR
   // log execution
   always @(posedge clk_i) begin
-    // if (trace_log_enable) begin
+    if (trace_log_enable) begin
 
-      // int fh = file_handle;
+      int fh = file_handle;
 
-      // // open file
-      // if (fh == 32'h0) begin
-        // string file_name_base = "trace_core";
-        // void'($value$plusargs("ibex_tracer_file_base=%s", file_name_base));
-        // $sformat(file_name, "%s.log", file_name_base);
+      // open file
+      if (fh == 32'h0) begin
+        string file_name_base = "trace_core";
+        void'($value$plusargs("ibex_tracer_file_base=%s", file_name_base));
+        $sformat(file_name, "%s.log", file_name_base);
 
-        // $display("%m: Writing execution trace to %s", file_name);
-        // fh = $fopen(file_name, "w");
-        // file_handle <= fh;
+        $display("%m: Writing execution trace to %s", file_name);
+        fh = $fopen(file_name, "w");
+        file_handle <= fh;
 
-        // // TODO: write file header
-      // end
+        // TODO: write file header
+      end
 
-      // printbuffer_dumpline(fh);
-    // end
+      printbuffer_dumpline(fh);
+    end
   end
+`endif
 
   always @(posedge clk_i or negedge rst_ni) begin
     if (!rst_ni) begin
@@ -182,8 +192,8 @@ module ibex_cpi_tracer (
       if (~inhibit) begin
         // determine if underutilization at frontend-backend transfer
         if (~(alu_req_i |
-              (mul_req_i & ~mul_wait_prev) |
-              (div_req_i & ~div_wait_prev) |
+              (mul_req_i & ~mul_wait_prev) | // only consider first cycle of request
+              (div_req_i & ~div_wait_prev) | // only consider first cycle of request
               lsu_req_i)) begin
 
           // Possible frontend causes
