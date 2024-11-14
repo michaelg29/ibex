@@ -1283,6 +1283,20 @@ module ibex_cs_registers #(
     end
   end
 
+  // top-down signals
+  logic mul_wait_prev, div_wait_prev;
+
+  // only see first cycle of mul/div wait
+  always_ff @(posedge clk_i or negedge rst_ni) begin
+    if (!rst_ni) begin
+      mul_wait_prev <= 1'b0;
+      div_wait_prev <= 1'b0;
+    end else begin
+      mul_wait_prev <= mul_wait_i;
+      div_wait_prev <= div_wait_i;
+    end
+  end
+
   // event selection (hardwired) & control
   always_comb begin : gen_mhpmcounter_incr
 
@@ -1309,6 +1323,40 @@ module ibex_cs_registers #(
     mhpmcounter_incr[10] = instr_ret_compressed_i; // num of compressed instr
     mhpmcounter_incr[11] = mul_wait_i;             // cycles waiting for multiply
     mhpmcounter_incr[12] = div_wait_i;             // cycles waiting for divide
+
+    // additional counters for top-down
+    // ================================
+    //   13: base component
+    //   14: instruction cache component
+    //   15: branch prediction component
+    //   16: data cache component
+    //   17: execution component
+    //   18: dependency component
+    if (~(alu_req_i |
+              (mul_req_i & ~mul_wait_prev) | // only consider first cycle of request
+              (div_req_i & ~div_wait_prev) | // only consider first cycle of request
+              lsu_req_i)) begin
+
+      // Possible frontend causes
+      // ========================
+      if (iside_wait_i) begin // I-cache miss
+        mhpmcounter_incr[14] = 1'b1;
+      end else if (mispredict_i) begin // misprediction
+        mhpmcounter_incr[15] = 1'b1;
+      end
+
+      // Possible backend causes
+      // =======================
+      else if (dside_wait_i) begin // data cache miss
+        mhpmcounter_incr[16] = 1'b1;
+      end else if (mul_wait_i | div_wait_i) begin // execution block (ALU, mult, div) latency
+        mhpmcounter_incr[17] = 1'b1;
+      end else begin // dependency violation
+        mhpmcounter_incr[18] = 1'b0;
+      end
+    end else begin
+      mhpmcounter_incr[13] = 1'b0;
+    end
   end
 
   // event selector (hardwired, 0 means no event)
