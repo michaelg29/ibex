@@ -18,6 +18,7 @@ module ibex_cs_registers #(
   parameter bit                     ICache            = 1'b0,
   parameter int unsigned            MHPMCounterNum    = 10,
   parameter int unsigned            MHPMCounterWidth  = 40,
+  parameter bit                     TopDownEnable     = 0,
   parameter bit                     PMPEnable         = 0,
   parameter int unsigned            PMPGranularity    = 0,
   parameter int unsigned            PMPNumRegions     = 4,
@@ -121,7 +122,14 @@ module ibex_cs_registers #(
   input  logic                 mem_store_i,                 // store to memory in this cycle
   input  logic                 dside_wait_i,                // core waiting for the dside
   input  logic                 mul_wait_i,                  // core waiting for multiply
-  input  logic                 div_wait_i                   // core waiting for divide
+  input  logic                 div_wait_i,                  // core waiting for divide
+
+  // Top-down analysis signals
+  input  logic                 mispredict_i,                // branch prediction error
+  input  logic                 alu_req_i,                   // ALU issue request
+  input  logic                 mul_req_i,                   // multiplication issue request
+  input  logic                 div_req_i,                   // division issue request
+  input  logic                 lsu_req_i                    // load-store issue request
 );
 
   import ibex_pkg::*;

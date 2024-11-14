@@ -22,6 +22,7 @@ module ibex_core import ibex_pkg::*; #(
   parameter ibex_pkg::pmp_mseccfg_t PMPRstMsecCfg    = ibex_pkg::PmpMseccfgRst,
   parameter int unsigned            MHPMCounterNum   = 0,
   parameter int unsigned            MHPMCounterWidth = 40,
+  parameter bit                     TopDownEnable    = 0,
   parameter bit                     RV32E            = 1'b0,
   parameter rv32m_e                 RV32M            = RV32MFast,
   parameter rv32b_e                 RV32B            = RV32BNone,
@@ -376,6 +377,12 @@ module ibex_core import ibex_pkg::*; #(
   logic        perf_tbranch;
   logic        perf_load;
   logic        perf_store;
+
+  logic        perf_mispredict;
+  logic        perf_alu_req;
+  logic        perf_mul_req;
+  logic        perf_div_req;
+  logic        perf_lsu_req;
 
   // for RVFI
   logic        illegal_insn_id, unused_illegal_insn_id; // ID stage sees an illegal instruction
@@ -1040,6 +1047,32 @@ module ibex_core import ibex_pkg::*; #(
   assign csr_wdata  = alu_operand_a_ex;
   assign csr_addr   = csr_num_e'(csr_access ? alu_operand_b_ex[11:0] : 12'b0);
 
+  // assign top-down analysis signals conditionally
+  if (TopDownEnable) begin : g_top_down_enable
+    // pull wires from components
+    assign perf_mispredict = nt_branch_mispredict;
+    assign perf_alu_req    = instr_first_cycle_id;
+    assign perf_mul_req    = mult_en_ex;
+    assign perf_div_req    = div_en_ex;
+    assign perf_lsu_req    = lsu_req;
+  end else begin : g_top_down_disable
+`ifdef SIMULATION_CPI_TRACING
+    // pull wires for elaboration
+    assign perf_mispredict = nt_branch_mispredict;
+    assign perf_alu_req    = instr_first_cycle_id;
+    assign perf_mul_req    = mult_en_ex;
+    assign perf_div_req    = div_en_ex;
+    assign perf_lsu_req    = lsu_req;
+`else
+    // zero out inputs in original design
+    assign perf_mispredict = '0;
+    assign perf_alu_req    = '0;
+    assign perf_mul_req    = '0;
+    assign perf_div_req    = '0;
+    assign perf_lsu_req    = '0;
+`endif
+  end
+
   ibex_cs_registers #(
     .DbgTriggerEn     (DbgTriggerEn),
     .DbgHwBreakNum    (DbgHwBreakNum),
@@ -1049,6 +1082,7 @@ module ibex_core import ibex_pkg::*; #(
     .ICache           (ICache),
     .MHPMCounterNum   (MHPMCounterNum),
     .MHPMCounterWidth (MHPMCounterWidth),
+    .TopDownEnable    (TopDownEnable),
     .PMPEnable        (PMPEnable),
     .PMPGranularity   (PMPGranularity),
     .PMPNumRegions    (PMPNumRegions),
@@ -1147,27 +1181,36 @@ module ibex_core import ibex_pkg::*; #(
     .mem_store_i                (perf_store),
     .dside_wait_i               (perf_dside_wait),
     .mul_wait_i                 (perf_mul_wait),
-    .div_wait_i                 (perf_div_wait)
+    .div_wait_i                 (perf_div_wait),
+
+    // top-down analysis signals
+    .mispredict_i(perf_mispredict),
+    .alu_req_i   (perf_alu_req),
+    .mul_req_i   (perf_mul_req),
+    .div_req_i   (perf_div_req),
+    .lsu_req_i   (perf_lsu_req)
   );
 
 `ifdef SIMULATION_CPI_TRACING
-  ibex_cpi_tracer u_cpi_tracer (
+  ibex_cpi_tracer #(
+    .N_LANES(1)
+  ) u_cpi_tracer (
     .clk_i,
     .rst_ni,
-    
+
     .inhibit(cs_registers_i.mcountinhibit[31]),
 
-    .mispredict_i(nt_branch_mispredict),
-    .iside_wait_i(perf_iside_wait),
-    .alu_req_i(instr_first_cycle_id),
-    .mul_req_i(mult_en_ex),
-    .div_req_i(div_en_ex),
-    .lsu_req_i(lsu_req),
-    
-    .instr_ret_i(perf_instr_ret_wb),
-    .dside_wait_i(perf_dside_wait),
-    .mul_wait_i(perf_mul_wait),
-    .div_wait_i(perf_div_wait)
+    .mispredict_i({perf_mispredict}),
+    .iside_wait_i({perf_iside_wait}),
+    .alu_req_i   ({perf_alu_req}),
+    .mul_req_i   ({perf_mul_req}),
+    .div_req_i   ({perf_div_req}),
+    .lsu_req_i   ({perf_lsu_req}),
+
+    .instr_ret_i ({perf_instr_ret_wb}),
+    .dside_wait_i({perf_dside_wait}),
+    .mul_wait_i  ({perf_mul_wait}),
+    .div_wait_i  ({perf_div_wait})
   );
 `endif
 

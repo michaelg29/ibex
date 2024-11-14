@@ -1,5 +1,7 @@
 
-module ibex_cpi_tracer (
+module ibex_cpi_tracer #(
+  parameter int N_LANES = 1
+) (
   // Clock and reset
   input  logic        clk_i,
   input  logic        rst_ni,
@@ -8,30 +10,29 @@ module ibex_cpi_tracer (
   input  logic        inhibit,
 
   // Frontend event signals
-  input  logic mispredict_i,
-  input  logic iside_wait_i,
-  input  logic alu_req_i,
-  input  logic mul_req_i,
-  input  logic div_req_i,
-  input  logic lsu_req_i,
+  input  logic [N_LANES-1:0] mispredict_i,
+  input  logic [N_LANES-1:0] iside_wait_i,
+  input  logic [N_LANES-1:0] alu_req_i,
+  input  logic [N_LANES-1:0] mul_req_i,
+  input  logic [N_LANES-1:0] div_req_i,
+  input  logic [N_LANES-1:0] lsu_req_i,
 
   // Backend event signals
-  input  logic instr_ret_i,
-  input  logic dside_wait_i,
-  input  logic mul_wait_i,
-  input  logic div_wait_i
+  input  logic [N_LANES-1:0] instr_ret_i,
+  input  logic [N_LANES-1:0] dside_wait_i,
+  input  logic [N_LANES-1:0] mul_wait_i,
+  input  logic [N_LANES-1:0] div_wait_i
 );
-
-  localparam int unsigned N_LANES = 1;
 
   // ==========================================
   // ===== INTERNAL SIGNALS AND VARIABLES =====
   // ==========================================
 
+
+`ifdef VERILATOR
   // imports
   import ibex_tracer_pkg::*;
 
-`ifdef VERILATOR
   // logging variables
   int          file_handle;
   string       file_name;
@@ -39,8 +40,8 @@ module ibex_cpi_tracer (
 `endif
 
   // signals
-  logic mul_wait_prev;
-  logic div_wait_prev;
+  logic [N_LANES-1:0] mul_wait_prev;
+  logic [N_LANES-1:0] div_wait_prev;
 
   // counters
   int unsigned cycle [N_LANES-1:0];
@@ -102,7 +103,7 @@ module ibex_cpi_tracer (
 
   // counters
   genvar i_cnt;
-  for (i_cnt = 0; i_cnt < N_LANES; ++i_cnt) begin: datapath_cnt
+  for (i_cnt = 0; i_cnt < N_LANES; ++i_cnt) begin: g_datapath_cnt
     always_ff @(posedge clk_i or negedge rst_ni) begin
       if (!rst_ni) begin
         cycle[i_cnt] <= 0;
@@ -140,7 +141,7 @@ module ibex_cpi_tracer (
         end
       end
     end
-  endgenerate
+  end
 
 `ifdef VERILATOR
   // log execution
@@ -167,19 +168,21 @@ module ibex_cpi_tracer (
   end
 `endif
 
-  always @(posedge clk_i or negedge rst_ni) begin
-    if (!rst_ni) begin
-      mul_wait_prev <= 1'b0;
-      div_wait_prev <= 1'b0;
-    end else begin
-      mul_wait_prev <= mul_wait_i;
-      div_wait_prev <= div_wait_i;
-    end
-  end
 
   // always executing logic for each instruction lane of the datapath
   genvar i_lane;
-  for (i_lane = 0; i_lane < N_LANES; ++i_lane) begin: datapath_comp
+  for (i_lane = 0; i_lane < N_LANES; ++i_lane) begin: g_datapath_comp
+
+    always @(posedge clk_i or negedge rst_ni) begin
+      if (!rst_ni) begin
+        mul_wait_prev[i_lane] <= 1'b0;
+        div_wait_prev[i_lane] <= 1'b0;
+      end else begin
+        mul_wait_prev[i_lane] <= mul_wait_i[i_lane];
+        div_wait_prev[i_lane] <= div_wait_i[i_lane];
+      end
+    end
+
     always_comb begin
       // default values
       base_comp[i_lane] = 1'b0;
@@ -191,24 +194,24 @@ module ibex_cpi_tracer (
 
       if (~inhibit) begin
         // determine if underutilization at frontend-backend transfer
-        if (~(alu_req_i |
-              (mul_req_i & ~mul_wait_prev) | // only consider first cycle of request
-              (div_req_i & ~div_wait_prev) | // only consider first cycle of request
-              lsu_req_i)) begin
+        if (~(alu_req_i[i_lane] |
+              (mul_req_i[i_lane] & ~mul_wait_prev[i_lane]) | // only consider first cycle of request
+              (div_req_i[i_lane] & ~div_wait_prev[i_lane]) | // only consider first cycle of request
+              lsu_req_i[i_lane])) begin
 
           // Possible frontend causes
           // ========================
-          if (iside_wait_i) begin // I-cache miss
+          if (iside_wait_i[i_lane]) begin // I-cache miss
             icache_comp[i_lane] = 1'b1;
-          end else if (mispredict_i) begin // misprediction
+          end else if (mispredict_i[i_lane]) begin // misprediction
             bpred_comp[i_lane] = 1'b1;
           end
 
           // Possible backend causes
           // =======================
-          else if (dside_wait_i) begin // data cache miss
+          else if (dside_wait_i[i_lane]) begin // data cache miss
             dcache_comp[i_lane] = 1'b1;
-          end else if (mul_wait_i | div_wait_i) begin // execution block (ALU, mult, div) latency
+          end else if (mul_wait_i[i_lane] | div_wait_i[i_lane]) begin // execution block (ALU, mult, div) latency
             ex_comp[i_lane] = 1'b1;
           end else begin // dependency violation
             dependency_comp[i_lane] = 1'b0;
