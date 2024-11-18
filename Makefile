@@ -1,4 +1,4 @@
-IBEX_CONFIG ?= small
+IBEX_CONFIG ?= opentitan
 
 FUSESOC_CONFIG_OPTS = $(shell ./util/ibex_config.py $(IBEX_CONFIG) fusesoc_opts)
 
@@ -115,3 +115,13 @@ test-cfg:
 .PHONY: python-lint
 python-lint:
 	$(MAKE) -C util lint
+
+.PHONY:clean-sim
+clean-sim:
+	(cd ./examples/sw/simple_system/$(PROGRAM) && \
+	rm $(PROGRAM).bin $(PROGRAM).vmem $(PROGRAM).d $(PROGRAM).o $(PROGRAM).elf)
+
+.PHONY:clean-bm
+clean-bm:
+	(cd ./examples/sw/benchmarks/coremark && \
+	rm coremark.bin coremark.vmem coremark.d coremark.o coremark.elf)
