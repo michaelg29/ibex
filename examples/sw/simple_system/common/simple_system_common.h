@@ -60,6 +60,12 @@ static inline void pcount_enable(int enable) {
   asm volatile("csrw  0x320, %0\n" : : "r"(inhibit_val));
 }
 
+// static inline int pcount_get_mul() {
+//   int count;
+//   asm volatile("csrr %0, 0xB0B;" : "=r"(count));
+//   return count;
+// }
+
 /**
  * Resets all performance counters.  This effects mcycle and minstret as well
  * as the mhpmcounterN counters.

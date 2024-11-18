@@ -1,0 +1,693 @@
+Archive member included to satisfy reference by file (symbol)
+
+/home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_modf.o)
+                              /tmp/ccVO5Xl1.o (modf)
+/home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_fpclassify.o)
+                              /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_modf.o) (__fpclassifyd)
+/home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(adddf3.o)
+                              /tmp/ccVO5Xl1.o (__adddf3)
+/home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divdf3.o)
+                              /tmp/ccP6iS0A.o (__divdf3)
+/home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(eqdf2.o)
+                              /tmp/ccVO5Xl1.o (__nedf2)
+/home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(gedf2.o)
+                              /tmp/ccP6iS0A.o (__gtdf2)
+/home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(ledf2.o)
+                              /tmp/ccP6iS0A.o (__ltdf2)
+/home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(muldf3.o)
+                              /tmp/ccVO5Xl1.o (__muldf3)
+/home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(subdf3.o)
+                              /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_modf.o) (__subdf3)
+/home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixdfsi.o)
+                              /tmp/ccVO5Xl1.o (__fixdfsi)
+/home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixunsdfsi.o)
+                              /tmp/ccP6iS0A.o (__fixunsdfsi)
+/home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsidf.o)
+                              /tmp/ccP6iS0A.o (__floatunsidf)
+/home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divsf3.o)
+                              /tmp/ccS3Q5VN.o (__divsf3)
+/home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsisf.o)
+                              /tmp/ccS3Q5VN.o (__floatunsisf)
+/home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(extendsfdf2.o)
+                              /tmp/ccS3Q5VN.o (__extendsfdf2)
+/home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clzsi2.o)
+                              /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(adddf3.o) (__clzsi2)
+/home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clz.o)
+                              /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clzsi2.o) (__clz_tab)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+ram              0x0000000000100000 0x0000000000030000
+stack            0x0000000000130000 0x0000000000008000
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD /tmp/ccm5IpYt.o
+LOAD /tmp/ccP6iS0A.o
+LOAD /tmp/ccy7Kk3B.o
+LOAD /tmp/ccBhjD3y.o
+LOAD /tmp/ccbjXtoe.o
+LOAD /tmp/ccS3Q5VN.o
+LOAD /tmp/ccjscU6E.o
+LOAD /tmp/ccVO5Xl1.o
+LOAD /tmp/cccgT1PQ.o
+LOAD /tmp/ccKKjvMe.o
+LOAD /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a
+LOAD /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a
+                0x0000000000002000                _min_stack = 0x2000
+                0x0000000000008000                _stack_len = LENGTH (stack)
+                0x0000000000138000                _stack_start = (ORIGIN (stack) + LENGTH (stack))
+                0x0000000000100080                _entry_point = (_vectors_start + 0x80)
+                0x0000000000020008                tohost = 0x20008
+                0x0000000000138010                fromhost = (_stack_start + 0x10)
+
+.vectors        0x0000000000100000       0x84
+                0x0000000000100000                . = ALIGN (0x4)
+                0x0000000000100000                _vectors_start = .
+ *(.vectors)
+ .vectors       0x0000000000100000       0x84 /tmp/cccgT1PQ.o
+                0x0000000000100084                _vectors_end = .
+
+.text           0x0000000000100090     0xd860
+                0x0000000000100090                . = ALIGN (0x4)
+ *(.text)
+ .text          0x0000000000100090     0x15b0 /tmp/ccm5IpYt.o
+                0x0000000000100090                calc_func
+                0x00000000001001d0                cmp_complex
+                0x00000000001003d0                cmp_idx
+                0x0000000000100430                copy_info
+                0x0000000000100450                core_bench_list
+                0x0000000000100cc0                core_list_init
+                0x0000000000101250                core_list_insert_new
+                0x00000000001012b0                core_list_remove
+                0x00000000001012e0                core_list_undo_remove
+                0x0000000000101300                core_list_find
+                0x0000000000101360                core_list_reverse
+                0x0000000000101410                core_list_mergesort
+ *fill*         0x0000000000101640        0x0 
+ .text          0x0000000000101640       0xa4 /tmp/ccP6iS0A.o
+                0x0000000000101640                iterate
+ *fill*         0x00000000001016e4        0xc 
+ .text          0x00000000001016f0     0x2b1c /tmp/ccy7Kk3B.o
+                0x00000000001016f0                matrix_test
+                0x0000000000102e30                core_bench_matrix
+                0x0000000000102e70                core_init_matrix
+                0x0000000000103290                matrix_sum
+                0x0000000000103730                matrix_mul_const
+                0x00000000001038f0                matrix_add_const
+                0x0000000000103b50                matrix_mul_vect
+                0x0000000000103d70                matrix_mul_matrix
+                0x0000000000103ff0                matrix_mul_matrix_bitextract
+ *fill*         0x000000000010420c        0x4 
+ .text          0x0000000000104210      0x920 /tmp/ccBhjD3y.o
+                0x0000000000104210                core_init_state
+                0x00000000001044d0                core_state_transition
+                0x00000000001047f0                core_bench_state
+ *fill*         0x0000000000104b30        0x0 
+ .text          0x0000000000104b30      0xbfc /tmp/ccbjXtoe.o
+                0x0000000000104b30                get_seed_32
+                0x0000000000104ba0                crcu8
+                0x0000000000104ce0                crcu16
+                0x0000000000104f70                crcu32
+                0x0000000000105490                crc16
+                0x0000000000105720                check_data_types
+ *fill*         0x000000000010572c        0x4 
+ .text          0x0000000000105730      0x2e8 /tmp/ccS3Q5VN.o
+                0x0000000000105730                barebones_clock
+                0x0000000000105740                pcount_read
+                0x00000000001057a0                dump_pcounts
+                0x0000000000105830                start_time
+                0x0000000000105870                stop_time
+                0x0000000000105890                get_time
+                0x00000000001058b0                time_in_secs
+                0x00000000001058e0                portable_init
+                0x0000000000105920                portable_fini
+ *fill*         0x0000000000105a18        0x8 
+ .text          0x0000000000105a20     0x3878 /tmp/ccjscU6E.o
+                0x0000000000106440                ee_printf
+ *fill*         0x0000000000109298        0x8 
+ .text          0x00000000001092a0      0xda0 /tmp/ccVO5Xl1.o
+                0x000000000010a000                ecvt
+                0x000000000010a010                ecvtbuf
+                0x000000000010a020                fcvt
+                0x000000000010a030                fcvtbuf
+ .text          0x000000000010a040       0xd0 /tmp/cccgT1PQ.o
+                0x000000000010a0cc                _start
+ .text          0x000000000010a110      0xcb4 /tmp/ccKKjvMe.o
+                0x000000000010a110                putchar
+                0x000000000010a120                puts
+                0x000000000010a1a0                puthex
+                0x000000000010a350                sim_halt
+                0x000000000010a360                pcount_reset
+                0x000000000010a460                get_mepc
+                0x000000000010a470                get_mcause
+                0x000000000010a480                get_mtval
+                0x000000000010a490                simple_exc_handler
+                0x000000000010aaf0                timer_enable
+                0x000000000010abd0                timer_disable
+                0x000000000010abe0                timer_read
+                0x000000000010ac70                timecmp_update
+                0x000000000010ac90                get_elapsed_time
+                0x000000000010aca0                simple_timer_handler
+ .text          0x000000000010adc4       0xda /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_modf.o)
+                0x000000000010adc4                modf
+ .text          0x000000000010ae9e       0x42 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_fpclassify.o)
+                0x000000000010ae9e                __fpclassifyd
+ .text          0x000000000010aee0      0x60a /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(adddf3.o)
+                0x000000000010aee0                __adddf3
+ .text          0x000000000010b4ea      0x53e /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divdf3.o)
+                0x000000000010b4ea                __divdf3
+ .text          0x000000000010ba28       0x6a /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(eqdf2.o)
+                0x000000000010ba28                __eqdf2
+                0x000000000010ba28                __nedf2
+ .text          0x000000000010ba92       0xa6 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(gedf2.o)
+                0x000000000010ba92                __gtdf2
+                0x000000000010ba92                __gedf2
+ .text          0x000000000010bb38       0xa6 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(ledf2.o)
+                0x000000000010bb38                __ltdf2
+                0x000000000010bb38                __ledf2
+ .text          0x000000000010bbde      0x440 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(muldf3.o)
+                0x000000000010bbde                __muldf3
+ .text          0x000000000010c01e      0x618 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(subdf3.o)
+                0x000000000010c01e                __subdf3
+ .text          0x000000000010c636       0x64 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixdfsi.o)
+                0x000000000010c636                __fixdfsi
+ .text          0x000000000010c69a       0x60 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixunsdfsi.o)
+                0x000000000010c69a                __fixunsdfsi
+ .text          0x000000000010c6fa       0x4e /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsidf.o)
+                0x000000000010c6fa                __floatunsidf
+ .text          0x000000000010c748      0x24e /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divsf3.o)
+                0x000000000010c748                __divsf3
+ .text          0x000000000010c996       0x9a /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsisf.o)
+                0x000000000010c996                __floatunsisf
+ .text          0x000000000010ca30       0x96 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(extendsfdf2.o)
+                0x000000000010ca30                __extendsfdf2
+ .text          0x000000000010cac6       0x3c /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clzsi2.o)
+                0x000000000010cac6                __clzsi2
+ .text          0x000000000010cb02        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clz.o)
+ *(.text.*)
+ *fill*         0x000000000010cb02        0xe 
+ .text.startup  0x000000000010cb10      0xde0 /tmp/ccP6iS0A.o
+                0x000000000010cb10                main
+
+.rodata         0x000000000010d8f0      0xa64
+                0x000000000010d8f0                . = ALIGN (0x4)
+ *(.srodata)
+ .srodata       0x000000000010d8f0        0x4 /tmp/ccS3Q5VN.o
+                0x000000000010d8f0                pcount_num
+ *(.srodata.*)
+ *fill*         0x000000000010d8f4        0x4 
+ .srodata.cst8  0x000000000010d8f8        0x8 /tmp/ccP6iS0A.o
+ .srodata.cst8  0x000000000010d900        0x8 /tmp/ccS3Q5VN.o
+ .srodata.cst4  0x000000000010d908        0x4 /tmp/ccS3Q5VN.o
+ *fill*         0x000000000010d90c        0x4 
+ .srodata.cst8  0x000000000010d910       0x10 /tmp/ccVO5Xl1.o
+                                         0x18 (size before relaxing)
+ *(.rodata)
+ .rodata        0x000000000010d920       0x40 /tmp/ccBhjD3y.o
+ .rodata        0x000000000010d960       0x18 /tmp/ccbjXtoe.o
+ .rodata        0x000000000010d978      0x204 /tmp/ccjscU6E.o
+ .rodata        0x000000000010db7c       0x3c /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divdf3.o)
+ .rodata        0x000000000010dbb8       0x3c /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(muldf3.o)
+ .rodata        0x000000000010dbf4       0x3c /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divsf3.o)
+ .rodata        0x000000000010dc30      0x100 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clz.o)
+                0x000000000010dc30                __clz_tab
+ *(.rodata.*)
+ .rodata.str1.4
+                0x000000000010dd30      0x3d6 /tmp/ccP6iS0A.o
+                                        0x3de (size before relaxing)
+ *fill*         0x000000000010e106        0x2 
+ .rodata.str1.4
+                0x000000000010e108       0xad /tmp/ccBhjD3y.o
+ *fill*         0x000000000010e1b5        0x3 
+ .rodata.str1.4
+                0x000000000010e1b8      0x100 /tmp/ccS3Q5VN.o
+                                        0x104 (size before relaxing)
+ .rodata.str1.4
+                0x000000000010e2b8       0x57 /tmp/ccjscU6E.o
+ *fill*         0x000000000010e30f        0x1 
+ .rodata.str1.4
+                0x000000000010e310       0x44 /tmp/ccKKjvMe.o
+
+.rela.dyn       0x000000000010e354        0x0
+ .rela.text     0x000000000010e354        0x0 /tmp/ccm5IpYt.o
+
+.data           0x000000000010e354       0x44
+                0x000000000010e354                . = ALIGN (0x4)
+ *(.sdata)
+ .sdata         0x000000000010e354        0xc /tmp/ccS3Q5VN.o
+                0x000000000010e354                default_num_contexts
+                0x000000000010e358                seed4_volatile
+                0x000000000010e35c                seed3_volatile
+ *(.sdata.*)
+ *(.data)
+ .data          0x000000000010e360        0x0 /tmp/ccm5IpYt.o
+ .data          0x000000000010e360        0xc /tmp/ccP6iS0A.o
+                0x000000000010e360                mem_name
+ .data          0x000000000010e36c        0x0 /tmp/ccy7Kk3B.o
+ .data          0x000000000010e36c        0x0 /tmp/ccBhjD3y.o
+ .data          0x000000000010e36c        0x0 /tmp/ccbjXtoe.o
+ .data          0x000000000010e36c       0x2c /tmp/ccS3Q5VN.o
+                0x000000000010e36c                pcount_names
+ .data          0x000000000010e398        0x0 /tmp/ccjscU6E.o
+ .data          0x000000000010e398        0x0 /tmp/ccVO5Xl1.o
+ .data          0x000000000010e398        0x0 /tmp/cccgT1PQ.o
+ .data          0x000000000010e398        0x0 /tmp/ccKKjvMe.o
+ .data          0x000000000010e398        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_modf.o)
+ .data          0x000000000010e398        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_fpclassify.o)
+ .data          0x000000000010e398        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(adddf3.o)
+ .data          0x000000000010e398        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divdf3.o)
+ .data          0x000000000010e398        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(eqdf2.o)
+ .data          0x000000000010e398        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(gedf2.o)
+ .data          0x000000000010e398        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(ledf2.o)
+ .data          0x000000000010e398        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(muldf3.o)
+ .data          0x000000000010e398        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(subdf3.o)
+ .data          0x000000000010e398        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixdfsi.o)
+ .data          0x000000000010e398        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixunsdfsi.o)
+ .data          0x000000000010e398        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsidf.o)
+ .data          0x000000000010e398        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divsf3.o)
+ .data          0x000000000010e398        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsisf.o)
+ .data          0x000000000010e398        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(extendsfdf2.o)
+ .data          0x000000000010e398        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clzsi2.o)
+ .data          0x000000000010e398        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clz.o)
+ *(.data.*)
+
+.bss            0x000000000010e398       0x78
+                0x000000000010e398                . = ALIGN (0x4)
+                0x000000000010e398                _bss_start = .
+ *(.sbss)
+ .sbss          0x000000000010e398       0x14 /tmp/ccS3Q5VN.o
+                0x000000000010e3a0                seed5_volatile
+                0x000000000010e3a4                seed2_volatile
+                0x000000000010e3a8                seed1_volatile
+ *fill*         0x000000000010e3ac        0x4 
+ .sbss          0x000000000010e3b0       0x10 /tmp/ccKKjvMe.o
+                0x000000000010e3b0                time_increment
+                0x000000000010e3b8                time_elapsed
+ *(.sbss.*)
+ *(.bss)
+ .bss           0x000000000010e3c0        0x0 /tmp/ccm5IpYt.o
+ .bss           0x000000000010e3c0        0x0 /tmp/ccP6iS0A.o
+ .bss           0x000000000010e3c0        0x0 /tmp/ccy7Kk3B.o
+ .bss           0x000000000010e3c0        0x0 /tmp/ccBhjD3y.o
+ .bss           0x000000000010e3c0        0x0 /tmp/ccbjXtoe.o
+ .bss           0x000000000010e3c0        0x0 /tmp/ccS3Q5VN.o
+ .bss           0x000000000010e3c0        0x0 /tmp/ccjscU6E.o
+ .bss           0x000000000010e3c0       0x50 /tmp/ccVO5Xl1.o
+ .bss           0x000000000010e410        0x0 /tmp/cccgT1PQ.o
+ .bss           0x000000000010e410        0x0 /tmp/ccKKjvMe.o
+ .bss           0x000000000010e410        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_modf.o)
+ .bss           0x000000000010e410        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_fpclassify.o)
+ .bss           0x000000000010e410        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(adddf3.o)
+ .bss           0x000000000010e410        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divdf3.o)
+ .bss           0x000000000010e410        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(eqdf2.o)
+ .bss           0x000000000010e410        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(gedf2.o)
+ .bss           0x000000000010e410        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(ledf2.o)
+ .bss           0x000000000010e410        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(muldf3.o)
+ .bss           0x000000000010e410        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(subdf3.o)
+ .bss           0x000000000010e410        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixdfsi.o)
+ .bss           0x000000000010e410        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixunsdfsi.o)
+ .bss           0x000000000010e410        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsidf.o)
+ .bss           0x000000000010e410        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divsf3.o)
+ .bss           0x000000000010e410        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsisf.o)
+ .bss           0x000000000010e410        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(extendsfdf2.o)
+ .bss           0x000000000010e410        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clzsi2.o)
+ .bss           0x000000000010e410        0x0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clz.o)
+ *(.bss.*)
+ *(COMMON)
+                0x000000000010e410                _bss_end = .
+
+.stack          0x0000000000130000     0x2000
+                0x0000000000130000                . = ALIGN (0x4)
+                0x0000000000132000                . = (. + _min_stack)
+ *fill*         0x0000000000130000     0x2000 
+                0x0000000000132000                . = ALIGN (0x4)
+                0x0000000000132000                stack = .
+                0x0000000000132000                _stack = .
+OUTPUT(/home/prpate/ibex/ibex/examples/sw/benchmarks/coremark/coremark.elf elf32-littleriscv)
+
+.debug_info     0x0000000000000000     0x886f
+ .debug_info    0x0000000000000000     0x111f /tmp/ccm5IpYt.o
+ .debug_info    0x000000000000111f      0xcd5 /tmp/ccP6iS0A.o
+ .debug_info    0x0000000000001df4      0xb2c /tmp/ccy7Kk3B.o
+ .debug_info    0x0000000000002920      0x56a /tmp/ccBhjD3y.o
+ .debug_info    0x0000000000002e8a      0x566 /tmp/ccbjXtoe.o
+ .debug_info    0x00000000000033f0      0x6b9 /tmp/ccS3Q5VN.o
+ .debug_info    0x0000000000003aa9      0xa7a /tmp/ccjscU6E.o
+ .debug_info    0x0000000000004523      0x6aa /tmp/ccVO5Xl1.o
+ .debug_info    0x0000000000004bcd       0x22 /tmp/cccgT1PQ.o
+ .debug_info    0x0000000000004bef      0x7ad /tmp/ccKKjvMe.o
+ .debug_info    0x000000000000539c      0x24a /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_modf.o)
+ .debug_info    0x00000000000055e6      0x140 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_fpclassify.o)
+ .debug_info    0x0000000000005726      0x581 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(adddf3.o)
+ .debug_info    0x0000000000005ca7      0x72a /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divdf3.o)
+ .debug_info    0x00000000000063d1      0x255 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(eqdf2.o)
+ .debug_info    0x0000000000006626      0x253 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(gedf2.o)
+ .debug_info    0x0000000000006879      0x253 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(ledf2.o)
+ .debug_info    0x0000000000006acc      0x766 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(muldf3.o)
+ .debug_info    0x0000000000007232      0x581 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(subdf3.o)
+ .debug_info    0x00000000000077b3      0x1e7 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixdfsi.o)
+ .debug_info    0x000000000000799a      0x1d5 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixunsdfsi.o)
+ .debug_info    0x0000000000007b6f      0x28e /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsidf.o)
+ .debug_info    0x0000000000007dfd      0x3a3 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divsf3.o)
+ .debug_info    0x00000000000081a0      0x229 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsisf.o)
+ .debug_info    0x00000000000083c9      0x28b /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(extendsfdf2.o)
+ .debug_info    0x0000000000008654      0x144 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clzsi2.o)
+ .debug_info    0x0000000000008798       0xd7 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clz.o)
+
+.debug_abbrev   0x0000000000000000     0x2929
+ .debug_abbrev  0x0000000000000000      0x2cd /tmp/ccm5IpYt.o
+ .debug_abbrev  0x00000000000002cd      0x1e8 /tmp/ccP6iS0A.o
+ .debug_abbrev  0x00000000000004b5      0x22c /tmp/ccy7Kk3B.o
+ .debug_abbrev  0x00000000000006e1      0x209 /tmp/ccBhjD3y.o
+ .debug_abbrev  0x00000000000008ea      0x175 /tmp/ccbjXtoe.o
+ .debug_abbrev  0x0000000000000a5f      0x2c0 /tmp/ccS3Q5VN.o
+ .debug_abbrev  0x0000000000000d1f      0x2f1 /tmp/ccjscU6E.o
+ .debug_abbrev  0x0000000000001010      0x126 /tmp/ccVO5Xl1.o
+ .debug_abbrev  0x0000000000001136       0x12 /tmp/cccgT1PQ.o
+ .debug_abbrev  0x0000000000001148      0x25c /tmp/ccKKjvMe.o
+ .debug_abbrev  0x00000000000013a4      0x135 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_modf.o)
+ .debug_abbrev  0x00000000000014d9       0xd8 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_fpclassify.o)
+ .debug_abbrev  0x00000000000015b1      0x173 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(adddf3.o)
+ .debug_abbrev  0x0000000000001724      0x173 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divdf3.o)
+ .debug_abbrev  0x0000000000001897      0x14b /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(eqdf2.o)
+ .debug_abbrev  0x00000000000019e2      0x15e /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(gedf2.o)
+ .debug_abbrev  0x0000000000001b40      0x15e /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(ledf2.o)
+ .debug_abbrev  0x0000000000001c9e      0x185 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(muldf3.o)
+ .debug_abbrev  0x0000000000001e23      0x173 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(subdf3.o)
+ .debug_abbrev  0x0000000000001f96      0x15e /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixdfsi.o)
+ .debug_abbrev  0x00000000000020f4      0x15e /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixunsdfsi.o)
+ .debug_abbrev  0x0000000000002252      0x164 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsidf.o)
+ .debug_abbrev  0x00000000000023b6      0x14c /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divsf3.o)
+ .debug_abbrev  0x0000000000002502      0x195 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsisf.o)
+ .debug_abbrev  0x0000000000002697      0x158 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(extendsfdf2.o)
+ .debug_abbrev  0x00000000000027ef       0xca /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clzsi2.o)
+ .debug_abbrev  0x00000000000028b9       0x70 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clz.o)
+
+.debug_loc      0x0000000000000000    0x12006
+ .debug_loc     0x0000000000000000     0x2ce2 /tmp/ccm5IpYt.o
+ .debug_loc     0x0000000000002ce2      0x67e /tmp/ccP6iS0A.o
+ .debug_loc     0x0000000000003360     0x1e0d /tmp/ccy7Kk3B.o
+ .debug_loc     0x000000000000516d      0x95a /tmp/ccBhjD3y.o
+ .debug_loc     0x0000000000005ac7     0x14d2 /tmp/ccbjXtoe.o
+ .debug_loc     0x0000000000006f99      0x250 /tmp/ccS3Q5VN.o
+ .debug_loc     0x00000000000071e9     0x39ef /tmp/ccjscU6E.o
+ .debug_loc     0x000000000000abd8      0xa8b /tmp/ccVO5Xl1.o
+ .debug_loc     0x000000000000b663      0xf32 /tmp/ccKKjvMe.o
+ .debug_loc     0x000000000000c595      0x2d0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_modf.o)
+ .debug_loc     0x000000000000c865       0x9a /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_fpclassify.o)
+ .debug_loc     0x000000000000c8ff     0x11ec /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(adddf3.o)
+ .debug_loc     0x000000000000daeb     0x1494 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divdf3.o)
+ .debug_loc     0x000000000000ef7f       0xa4 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(eqdf2.o)
+ .debug_loc     0x000000000000f023      0x135 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(gedf2.o)
+ .debug_loc     0x000000000000f158      0x135 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(ledf2.o)
+ .debug_loc     0x000000000000f28d      0xd56 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(muldf3.o)
+ .debug_loc     0x000000000000ffe3     0x114d /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(subdf3.o)
+ .debug_loc     0x0000000000011130      0x181 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixdfsi.o)
+ .debug_loc     0x00000000000112b1       0xe7 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixunsdfsi.o)
+ .debug_loc     0x0000000000011398      0x14f /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsidf.o)
+ .debug_loc     0x00000000000114e7      0x74d /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divsf3.o)
+ .debug_loc     0x0000000000011c34      0x165 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsisf.o)
+ .debug_loc     0x0000000000011d99      0x202 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(extendsfdf2.o)
+ .debug_loc     0x0000000000011f9b       0x6b /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clzsi2.o)
+
+.debug_aranges  0x0000000000000000      0x368
+ .debug_aranges
+                0x0000000000000000       0x20 /tmp/ccm5IpYt.o
+ .debug_aranges
+                0x0000000000000020       0x28 /tmp/ccP6iS0A.o
+ .debug_aranges
+                0x0000000000000048       0x20 /tmp/ccy7Kk3B.o
+ .debug_aranges
+                0x0000000000000068       0x20 /tmp/ccBhjD3y.o
+ .debug_aranges
+                0x0000000000000088       0x20 /tmp/ccbjXtoe.o
+ .debug_aranges
+                0x00000000000000a8       0x20 /tmp/ccS3Q5VN.o
+ .debug_aranges
+                0x00000000000000c8       0x20 /tmp/ccjscU6E.o
+ .debug_aranges
+                0x00000000000000e8       0x20 /tmp/ccVO5Xl1.o
+ .debug_aranges
+                0x0000000000000108       0x28 /tmp/cccgT1PQ.o
+ .debug_aranges
+                0x0000000000000130       0x20 /tmp/ccKKjvMe.o
+ .debug_aranges
+                0x0000000000000150       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_modf.o)
+ .debug_aranges
+                0x0000000000000170       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_fpclassify.o)
+ .debug_aranges
+                0x0000000000000190       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(adddf3.o)
+ .debug_aranges
+                0x00000000000001b0       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divdf3.o)
+ .debug_aranges
+                0x00000000000001d0       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(eqdf2.o)
+ .debug_aranges
+                0x00000000000001f0       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(gedf2.o)
+ .debug_aranges
+                0x0000000000000210       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(ledf2.o)
+ .debug_aranges
+                0x0000000000000230       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(muldf3.o)
+ .debug_aranges
+                0x0000000000000250       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(subdf3.o)
+ .debug_aranges
+                0x0000000000000270       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixdfsi.o)
+ .debug_aranges
+                0x0000000000000290       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixunsdfsi.o)
+ .debug_aranges
+                0x00000000000002b0       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsidf.o)
+ .debug_aranges
+                0x00000000000002d0       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divsf3.o)
+ .debug_aranges
+                0x00000000000002f0       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsisf.o)
+ .debug_aranges
+                0x0000000000000310       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(extendsfdf2.o)
+ .debug_aranges
+                0x0000000000000330       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clzsi2.o)
+ .debug_aranges
+                0x0000000000000350       0x18 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clz.o)
+
+.debug_ranges   0x0000000000000000     0x2228
+ .debug_ranges  0x0000000000000000      0x430 /tmp/ccm5IpYt.o
+ .debug_ranges  0x0000000000000430       0xb0 /tmp/ccP6iS0A.o
+ .debug_ranges  0x00000000000004e0      0x2c8 /tmp/ccy7Kk3B.o
+ .debug_ranges  0x00000000000007a8      0x208 /tmp/ccBhjD3y.o
+ .debug_ranges  0x00000000000009b0      0x1a8 /tmp/ccbjXtoe.o
+ .debug_ranges  0x0000000000000b58       0x50 /tmp/ccS3Q5VN.o
+ .debug_ranges  0x0000000000000ba8      0x248 /tmp/ccjscU6E.o
+ .debug_ranges  0x0000000000000df0       0x20 /tmp/cccgT1PQ.o
+ .debug_ranges  0x0000000000000e10      0x8e0 /tmp/ccKKjvMe.o
+ .debug_ranges  0x00000000000016f0       0x30 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_modf.o)
+ .debug_ranges  0x0000000000001720      0x248 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(adddf3.o)
+ .debug_ranges  0x0000000000001968      0x198 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divdf3.o)
+ .debug_ranges  0x0000000000001b00       0x48 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(eqdf2.o)
+ .debug_ranges  0x0000000000001b48       0x50 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(gedf2.o)
+ .debug_ranges  0x0000000000001b98       0x50 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(ledf2.o)
+ .debug_ranges  0x0000000000001be8      0x1e0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(muldf3.o)
+ .debug_ranges  0x0000000000001dc8      0x250 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(subdf3.o)
+ .debug_ranges  0x0000000000002018       0x18 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixdfsi.o)
+ .debug_ranges  0x0000000000002030       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixunsdfsi.o)
+ .debug_ranges  0x0000000000002050       0x70 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsidf.o)
+ .debug_ranges  0x00000000000020c0       0xc0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divsf3.o)
+ .debug_ranges  0x0000000000002180       0x50 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsisf.o)
+ .debug_ranges  0x00000000000021d0       0x38 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(extendsfdf2.o)
+ .debug_ranges  0x0000000000002208       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clzsi2.o)
+
+.debug_line     0x0000000000000000    0x22714
+ .debug_line    0x0000000000000000     0x38d0 /tmp/ccm5IpYt.o
+ .debug_line    0x00000000000038d0     0x1871 /tmp/ccP6iS0A.o
+ .debug_line    0x0000000000005141     0x6928 /tmp/ccy7Kk3B.o
+ .debug_line    0x000000000000ba69     0x182c /tmp/ccBhjD3y.o
+ .debug_line    0x000000000000d295     0x24c5 /tmp/ccbjXtoe.o
+ .debug_line    0x000000000000f75a      0x551 /tmp/ccS3Q5VN.o
+ .debug_line    0x000000000000fcab     0x7c5e /tmp/ccjscU6E.o
+ .debug_line    0x0000000000017909     0x1700 /tmp/ccVO5Xl1.o
+ .debug_line    0x0000000000019009      0x19b /tmp/cccgT1PQ.o
+ .debug_line    0x00000000000191a4     0x2ed6 /tmp/ccKKjvMe.o
+ .debug_line    0x000000000001c07a      0x3f8 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_modf.o)
+ .debug_line    0x000000000001c472      0x2d0 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_fpclassify.o)
+ .debug_line    0x000000000001c742     0x1050 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(adddf3.o)
+ .debug_line    0x000000000001d792      0xfa7 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divdf3.o)
+ .debug_line    0x000000000001e739      0x28d /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(eqdf2.o)
+ .debug_line    0x000000000001e9c6      0x322 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(gedf2.o)
+ .debug_line    0x000000000001ece8      0x322 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(ledf2.o)
+ .debug_line    0x000000000001f00a      0xde2 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(muldf3.o)
+ .debug_line    0x000000000001fdec     0x10b5 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(subdf3.o)
+ .debug_line    0x0000000000020ea1      0x251 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixdfsi.o)
+ .debug_line    0x00000000000210f2      0x1e2 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixunsdfsi.o)
+ .debug_line    0x00000000000212d4      0x2ab /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsidf.o)
+ .debug_line    0x000000000002157f      0x881 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divsf3.o)
+ .debug_line    0x0000000000021e00      0x37a /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsisf.o)
+ .debug_line    0x000000000002217a      0x3e2 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(extendsfdf2.o)
+ .debug_line    0x000000000002255c      0x122 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clzsi2.o)
+ .debug_line    0x000000000002267e       0x96 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clz.o)
+
+.debug_str      0x0000000000000000     0x1c78
+ .debug_str     0x0000000000000000      0x446 /tmp/ccm5IpYt.o
+                                        0x4b9 (size before relaxing)
+ .debug_str     0x0000000000000446      0x1b5 /tmp/ccP6iS0A.o
+                                        0x488 (size before relaxing)
+ .debug_str     0x00000000000005fb       0xb1 /tmp/ccy7Kk3B.o
+                                        0x2c0 (size before relaxing)
+ .debug_str     0x00000000000006ac      0x117 /tmp/ccBhjD3y.o
+                                        0x323 (size before relaxing)
+ .debug_str     0x00000000000007c3       0x6a /tmp/ccbjXtoe.o
+                                        0x260 (size before relaxing)
+ .debug_str     0x000000000000082d      0x132 /tmp/ccS3Q5VN.o
+                                        0x41a (size before relaxing)
+ .debug_str     0x000000000000095f      0x14f /tmp/ccjscU6E.o
+                                        0x32f (size before relaxing)
+ .debug_str     0x0000000000000aae       0x62 /tmp/ccVO5Xl1.o
+                                        0x22b (size before relaxing)
+ .debug_str     0x0000000000000b10       0x3a /tmp/cccgT1PQ.o
+                                         0x67 (size before relaxing)
+ .debug_str     0x0000000000000b4a      0x159 /tmp/ccKKjvMe.o
+                                        0x302 (size before relaxing)
+ .debug_str     0x0000000000000ca3      0x19e /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_modf.o)
+                                        0x25f (size before relaxing)
+ .debug_str     0x0000000000000e41       0xd5 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_fpclassify.o)
+                                        0x234 (size before relaxing)
+ .debug_str     0x0000000000000f16      0x2ee /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(adddf3.o)
+                                        0x37d (size before relaxing)
+ .debug_str     0x0000000000001204      0x218 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divdf3.o)
+                                        0x43f (size before relaxing)
+ .debug_str     0x000000000000141c       0x96 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(eqdf2.o)
+                                        0x28e (size before relaxing)
+ .debug_str     0x00000000000014b2       0x9b /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(gedf2.o)
+                                        0x2b2 (size before relaxing)
+ .debug_str     0x000000000000154d       0x77 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(ledf2.o)
+                                        0x2b2 (size before relaxing)
+ .debug_str     0x00000000000015c4      0x195 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(muldf3.o)
+                                        0x497 (size before relaxing)
+ .debug_str     0x0000000000001759       0x70 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(subdf3.o)
+                                        0x37d (size before relaxing)
+ .debug_str     0x00000000000017c9       0x8c /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixdfsi.o)
+                                        0x28b (size before relaxing)
+ .debug_str     0x0000000000001855       0x74 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixunsdfsi.o)
+                                        0x28a (size before relaxing)
+ .debug_str     0x00000000000018c9       0xa2 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsidf.o)
+                                        0x327 (size before relaxing)
+ .debug_str     0x000000000000196b      0x150 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divsf3.o)
+                                        0x3aa (size before relaxing)
+ .debug_str     0x0000000000001abb       0x8a /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsisf.o)
+                                        0x308 (size before relaxing)
+ .debug_str     0x0000000000001b45       0x82 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(extendsfdf2.o)
+                                        0x2b8 (size before relaxing)
+ .debug_str     0x0000000000001bc7       0xb1 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clzsi2.o)
+                                        0x286 (size before relaxing)
+ .debug_str     0x0000000000001c78      0x269 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clz.o)
+
+.comment        0x0000000000000000       0x26
+ .comment       0x0000000000000000       0x26 /tmp/ccm5IpYt.o
+                                         0x27 (size before relaxing)
+ .comment       0x0000000000000026       0x27 /tmp/ccP6iS0A.o
+ .comment       0x0000000000000026       0x27 /tmp/ccy7Kk3B.o
+ .comment       0x0000000000000026       0x27 /tmp/ccBhjD3y.o
+ .comment       0x0000000000000026       0x27 /tmp/ccbjXtoe.o
+ .comment       0x0000000000000026       0x27 /tmp/ccS3Q5VN.o
+ .comment       0x0000000000000026       0x27 /tmp/ccjscU6E.o
+ .comment       0x0000000000000026       0x27 /tmp/ccVO5Xl1.o
+ .comment       0x0000000000000026       0x27 /tmp/ccKKjvMe.o
+ .comment       0x0000000000000026       0x27 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_modf.o)
+ .comment       0x0000000000000026       0x27 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_fpclassify.o)
+ .comment       0x0000000000000026       0x27 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(adddf3.o)
+ .comment       0x0000000000000026       0x27 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divdf3.o)
+ .comment       0x0000000000000026       0x27 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(eqdf2.o)
+ .comment       0x0000000000000026       0x27 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(gedf2.o)
+ .comment       0x0000000000000026       0x27 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(ledf2.o)
+ .comment       0x0000000000000026       0x27 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(muldf3.o)
+ .comment       0x0000000000000026       0x27 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(subdf3.o)
+ .comment       0x0000000000000026       0x27 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixdfsi.o)
+ .comment       0x0000000000000026       0x27 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixunsdfsi.o)
+ .comment       0x0000000000000026       0x27 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsidf.o)
+ .comment       0x0000000000000026       0x27 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divsf3.o)
+ .comment       0x0000000000000026       0x27 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsisf.o)
+ .comment       0x0000000000000026       0x27 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(extendsfdf2.o)
+ .comment       0x0000000000000026       0x27 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clzsi2.o)
+ .comment       0x0000000000000026       0x27 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clz.o)
+
+.riscv.attributes
+                0x0000000000000000       0x2a
+ .riscv.attributes
+                0x0000000000000000       0x21 /tmp/ccm5IpYt.o
+ .riscv.attributes
+                0x0000000000000021       0x21 /tmp/ccP6iS0A.o
+ .riscv.attributes
+                0x0000000000000042       0x21 /tmp/ccy7Kk3B.o
+ .riscv.attributes
+                0x0000000000000063       0x21 /tmp/ccBhjD3y.o
+ .riscv.attributes
+                0x0000000000000084       0x21 /tmp/ccbjXtoe.o
+ .riscv.attributes
+                0x00000000000000a5       0x25 /tmp/ccS3Q5VN.o
+ .riscv.attributes
+                0x00000000000000ca       0x21 /tmp/ccjscU6E.o
+ .riscv.attributes
+                0x00000000000000eb       0x21 /tmp/ccVO5Xl1.o
+ .riscv.attributes
+                0x000000000000010c       0x23 /tmp/cccgT1PQ.o
+ .riscv.attributes
+                0x000000000000012f       0x25 /tmp/ccKKjvMe.o
+ .riscv.attributes
+                0x0000000000000154       0x26 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_modf.o)
+ .riscv.attributes
+                0x000000000000017a       0x26 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_fpclassify.o)
+ .riscv.attributes
+                0x00000000000001a0       0x26 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(adddf3.o)
+ .riscv.attributes
+                0x00000000000001c6       0x26 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divdf3.o)
+ .riscv.attributes
+                0x00000000000001ec       0x26 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(eqdf2.o)
+ .riscv.attributes
+                0x0000000000000212       0x26 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(gedf2.o)
+ .riscv.attributes
+                0x0000000000000238       0x26 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(ledf2.o)
+ .riscv.attributes
+                0x000000000000025e       0x26 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(muldf3.o)
+ .riscv.attributes
+                0x0000000000000284       0x26 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(subdf3.o)
+ .riscv.attributes
+                0x00000000000002aa       0x26 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixdfsi.o)
+ .riscv.attributes
+                0x00000000000002d0       0x26 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixunsdfsi.o)
+ .riscv.attributes
+                0x00000000000002f6       0x26 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsidf.o)
+ .riscv.attributes
+                0x000000000000031c       0x26 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divsf3.o)
+ .riscv.attributes
+                0x0000000000000342       0x26 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsisf.o)
+ .riscv.attributes
+                0x0000000000000368       0x26 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(extendsfdf2.o)
+ .riscv.attributes
+                0x000000000000038e       0x26 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clzsi2.o)
+ .riscv.attributes
+                0x00000000000003b4       0x26 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clz.o)
+
+.debug_frame    0x0000000000000000      0xbcc
+ .debug_frame   0x0000000000000000      0x1a0 /tmp/ccm5IpYt.o
+ .debug_frame   0x00000000000001a0       0x94 /tmp/ccP6iS0A.o
+ .debug_frame   0x0000000000000234      0x1f4 /tmp/ccy7Kk3B.o
+ .debug_frame   0x0000000000000428       0x84 /tmp/ccBhjD3y.o
+ .debug_frame   0x00000000000004ac       0x70 /tmp/ccbjXtoe.o
+ .debug_frame   0x000000000000051c      0x114 /tmp/ccS3Q5VN.o
+ .debug_frame   0x0000000000000630       0x90 /tmp/ccjscU6E.o
+ .debug_frame   0x00000000000006c0       0xa0 /tmp/ccVO5Xl1.o
+ .debug_frame   0x0000000000000760      0x12c /tmp/ccKKjvMe.o
+ .debug_frame   0x000000000000088c       0x40 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_modf.o)
+ .debug_frame   0x00000000000008cc       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/../../../../riscv32-unknown-elf/lib/libm.a(libm_a-s_fpclassify.o)
+ .debug_frame   0x00000000000008ec       0x44 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(adddf3.o)
+ .debug_frame   0x0000000000000930       0x58 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divdf3.o)
+ .debug_frame   0x0000000000000988       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(eqdf2.o)
+ .debug_frame   0x00000000000009a8       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(gedf2.o)
+ .debug_frame   0x00000000000009c8       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(ledf2.o)
+ .debug_frame   0x00000000000009e8       0x54 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(muldf3.o)
+ .debug_frame   0x0000000000000a3c       0x44 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(subdf3.o)
+ .debug_frame   0x0000000000000a80       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixdfsi.o)
+ .debug_frame   0x0000000000000aa0       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(fixunsdfsi.o)
+ .debug_frame   0x0000000000000ac0       0x34 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsidf.o)
+ .debug_frame   0x0000000000000af4       0x4c /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(divsf3.o)
+ .debug_frame   0x0000000000000b40       0x34 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(floatunsisf.o)
+ .debug_frame   0x0000000000000b74       0x38 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(extendsfdf2.o)
+ .debug_frame   0x0000000000000bac       0x20 /home/prpate/.local/bin/../lib/gcc/riscv32-unknown-elf/10.2.0/libgcc.a(_clzsi2.o)

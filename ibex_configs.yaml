@@ -38,7 +38,7 @@ small:
 # Configuration to match that used in the OpenTitan project
 opentitan:
   RV32E                    : 0
-  RV32M                    : "ibex_pkg::RV32MSingleCycle"
+  RV32M                    : "ibex_pkg::RV32MSlow"
   RV32B                    : "ibex_pkg::RV32BOTEarlGrey"
   RegFile                  : "ibex_pkg::RegFileFF"
   BranchTargetALU          : 1
@@ -52,7 +52,7 @@ opentitan:
   PMPEnable                : 1
   PMPGranularity           : 0
   PMPNumRegions            : 16
-  MHPMCounterNum           : 10
+  MHPMCounterNum           : 13
   MHPMCounterWidth         : 32
 
 # Three-stage pipeline with additional branch traget ALU and 1 cycle multiplier
