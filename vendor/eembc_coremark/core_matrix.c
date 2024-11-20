@@ -87,8 +87,8 @@ ee_u16 core_bench_matrix(mat_params *p, ee_s16 seed, ee_u16 crc) {
 	// ee_u32 matrix_test_bm[10000];
 
 	MATDAT val=(MATDAT)seed;
-	// for(ee_u32 k = 0; k < 10000; k++)
-	// 	matrix_test_bm[k] = 4*99;
+	for(ee_u32 k = 0; k < 10000; k++)
+		matrix_test_bm[k] = 4*99;
 	crc=crc16(matrix_test(N,C,A,B,val),crc);
 
 	return crc;
