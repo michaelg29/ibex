@@ -16,6 +16,32 @@ int div_values(int x, int y){
   return x/y;
 }
 
+void convert_string(int &c, char* s){
+  int count = c;
+  int i  = 0;
+  for(int j = 0; j < 12; j++){
+      i = 0;
+      *(s[0]) ='E';
+      *(s[1]) = '\n';
+      *(s[2]) = '\0';
+      if(count != 0){
+        while(count > 0){
+          *(s[i]) = count %10 + '0';
+          count /=10;
+          i++;
+        }
+
+        for(int k = 0; k < i; k++){
+          *(s[k]) = *(s[i-1-k]);
+        }
+
+        *(s[i]) = '\n';
+        i++;
+        *(s[i]) = '\0';
+      }
+    }
+}
+
 int main(int argc, char **argv) {
   // pcount_enable(0);
   // pcount_reset();
@@ -39,9 +65,9 @@ int main(int argc, char **argv) {
   pcount_enable(0);
   pcount_reset();
   pcount_enable(1);
-  double vec1[VECTOR_SIZE] = {};
-  double vec2[VECTOR_SIZE] = {};
-  double result[VECTOR_SIZE] = {};
+  int vec1[VECTOR_SIZE] = {};
+  int vec2[VECTOR_SIZE] = {};
+  int result[VECTOR_SIZE] = {};
 
   // std::vector<double> vec1(VECTOR_SIZE);
   //   std::vector<double> vec2(VECTOR_SIZE);
@@ -101,9 +127,12 @@ int main(int argc, char **argv) {
   }
   
   for (int i = 0; i < NUM_ITERATIONS; ++i) {
+      char s[20] ={'E', '\n', '\0'};
         for (int j = 0; j < VECTOR_SIZE; ++j) {
             result[j] = vec1[j] * vec2[j];
         }
+      convert_string(result[j], &s);
+      puts(s);
     }
    
 
