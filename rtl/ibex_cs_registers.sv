@@ -1324,38 +1324,40 @@ module ibex_cs_registers #(
     mhpmcounter_incr[11] = mul_wait_i;             // cycles waiting for multiply
     mhpmcounter_incr[12] = div_wait_i;             // cycles waiting for divide
 
-    // additional counters for top-down
-    // ================================
-    //   13: base component
-    //   14: instruction cache component
-    //   15: branch prediction component
-    //   16: data cache component
-    //   17: execution component
-    //   18: dependency component
-    if (~(alu_req_i |
-              (mul_req_i & ~mul_wait_prev) | // only consider first cycle of request
-              (div_req_i & ~div_wait_prev) | // only consider first cycle of request
-              lsu_req_i)) begin
+    if (TopDownEnable) begin: gen_topdown_incr
+      // additional counters for top-down
+      // ================================
+      //   13: base component
+      //   14: instruction cache component
+      //   15: branch prediction component
+      //   16: data cache component
+      //   17: execution component
+      //   18: dependency component
+      if (~(alu_req_i |
+                (mul_req_i & ~mul_wait_prev) | // only consider first cycle of request
+                (div_req_i & ~div_wait_prev) | // only consider first cycle of request
+                lsu_req_i)) begin
 
-      // Possible frontend causes
-      // ========================
-      if (iside_wait_i) begin // I-cache miss
-        mhpmcounter_incr[14] = 1'b1;
-      end else if (mispredict_i) begin // misprediction
-        mhpmcounter_incr[15] = 1'b1;
-      end
+        // Possible frontend causes
+        // ========================
+        if (iside_wait_i) begin // I-cache miss
+          mhpmcounter_incr[14] = 1'b1;
+        end else if (mispredict_i) begin // misprediction
+          mhpmcounter_incr[15] = 1'b1;
+        end
 
-      // Possible backend causes
-      // =======================
-      else if (dside_wait_i) begin // data cache miss
-        mhpmcounter_incr[16] = 1'b1;
-      end else if (mul_wait_i | div_wait_i) begin // execution block (ALU, mult, div) latency
-        mhpmcounter_incr[17] = 1'b1;
-      end else begin // dependency violation
-        mhpmcounter_incr[18] = 1'b0;
+        // Possible backend causes
+        // =======================
+        else if (dside_wait_i) begin // data cache miss
+          mhpmcounter_incr[16] = 1'b1;
+        end else if (mul_wait_i | div_wait_i) begin // execution block (ALU, mult, div) latency
+          mhpmcounter_incr[17] = 1'b1;
+        end else begin // dependency violation
+          mhpmcounter_incr[18] = 1'b0;
+        end
+      end else begin
+        mhpmcounter_incr[13] = 1'b0;
       end
-    end else begin
-      mhpmcounter_incr[13] = 1'b0;
     end
   end
 

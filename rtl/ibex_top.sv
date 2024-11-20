@@ -292,6 +292,7 @@ module ibex_top import ibex_pkg::*; #(
     .PMPRstMsecCfg    (PMPRstMsecCfg),
     .MHPMCounterNum   (MHPMCounterNum),
     .MHPMCounterWidth (MHPMCounterWidth),
+    .TopDownEnable    (TopDownEnable),
     .RV32E            (RV32E),
     .RV32M            (RV32M),
     .RV32B            (RV32B),
