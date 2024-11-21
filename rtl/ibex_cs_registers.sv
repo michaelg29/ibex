@@ -1283,19 +1283,60 @@ module ibex_cs_registers #(
     end
   end
 
-  // top-down signals
-  logic mul_wait_prev, div_wait_prev;
+  // additional counters for top-down
+  // ================================
+  if (TopDownEnable) begin: gen_topdown_enable
+    //   13: base component
+    //   14: instruction cache component
+    //   15: branch prediction component
+    //   16: data cache component
+    //   17: execution component
+    //   18: dependency component
+    logic [topdown_monitor_pkg::N_TOPDOWN_COMPS-1:0] topdown_incr;
 
-  // only see first cycle of mul/div wait
-  always_ff @(posedge clk_i or negedge rst_ni) begin
-    if (!rst_ni) begin
-      mul_wait_prev <= 1'b0;
-      div_wait_prev <= 1'b0;
-    end else begin
-      mul_wait_prev <= mul_wait_i;
-      div_wait_prev <= div_wait_i;
-    end
+    topdown_monitor #(
+      .IDX_ICACHE(1),
+      .IDX_BPRED(2),
+      .IDX_DCACHE(3),
+      .IDX_EXECUTE(4)
+    ) u_topdown_monitor (
+      // Clock and Reset
+      .clk_i(clk_i),
+      .rst_ni(rst_ni),
+
+      // Performance Counters
+      .instr_ret_i(instr_ret_i),
+      .instr_ret_compressed_i(instr_ret_compressed_i),
+      .instr_ret_spec_i(instr_ret_spec_i),
+      .instr_ret_compressed_spec_i(instr_ret_compressed_spec_i),
+      .iside_wait_i(iside_wait_i),
+      .jump_i(jump_i),
+      .branch_i(branch_i),
+      .branch_taken_i(branch_taken_i),
+      .mem_load_i(mem_load_i),
+      .mem_store_i(mem_store_i),
+      .dside_wait_i(dside_wait_i),
+      .mul_wait_i(mul_wait_i),
+      .div_wait_i(div_wait_i),
+
+      // Top-down analysis signals
+      .mispredict_i(mispredict_i),
+      .alu_req_i(alu_req_i),
+      .mul_req_i(mul_req_i),
+      .div_req_i(div_req_i),
+      .lsu_req_i(lsu_req_i),
+
+      // Counter increment control
+      .base_comp_incr_o(topdown_incr[0]),
+      .icache_comp_incr_o(topdown_incr[1]),
+      .bpred_comp_incr_o(topdown_incr[2]),
+      .dcache_comp_incr_o(topdown_incr[3]),
+      .ex_comp_incr_o(topdown_incr[4]),
+      .dependency_comp_incr_o(topdown_incr[5])
+    );
+
   end
+
 
   // event selection (hardwired) & control
   always_comb begin : gen_mhpmcounter_incr
@@ -1324,42 +1365,21 @@ module ibex_cs_registers #(
     mhpmcounter_incr[11] = mul_wait_i;             // cycles waiting for multiply
     mhpmcounter_incr[12] = div_wait_i;             // cycles waiting for divide
 
-    if (TopDownEnable) begin: gen_topdown_incr
-      // additional counters for top-down
-      // ================================
-      //   13: base component
-      //   14: instruction cache component
-      //   15: branch prediction component
-      //   16: data cache component
-      //   17: execution component
-      //   18: dependency component
-      if (~(alu_req_i |
-                (mul_req_i & ~mul_wait_prev) | // only consider first cycle of request
-                (div_req_i & ~div_wait_prev) | // only consider first cycle of request
-                lsu_req_i)) begin
-
-        // Possible frontend causes
-        // ========================
-        if (iside_wait_i) begin // I-cache miss
-          mhpmcounter_incr[14] = 1'b1;
-        end else if (mispredict_i) begin // misprediction
-          mhpmcounter_incr[15] = 1'b1;
-        end
-
-        // Possible backend causes
-        // =======================
-        else if (dside_wait_i) begin // data cache miss
-          mhpmcounter_incr[16] = 1'b1;
-        end else if (mul_wait_i | div_wait_i) begin // execution block (ALU, mult, div) latency
-          mhpmcounter_incr[17] = 1'b1;
-        end else begin // dependency violation
-          mhpmcounter_incr[18] = 1'b0;
-        end
-      end else begin
-        mhpmcounter_incr[13] = 1'b0;
-      end
+    // top-down signal propagation
+    if (TopDownEnable) begin : gen_mhpmcounter_incr_topdown
+      mhpmcounter_incr[13+topdown_monitor_pkg::N_TOPDOWN_COMPS-1:13] =
+        gen_topdown_enable.topdown_incr[topdown_monitor_pkg::N_TOPDOWN_COMPS-1:0];
     end
   end
+
+  // additional counters for top-down
+  // ================================
+  //   13: base component
+  //   14: instruction cache component
+  //   15: branch prediction component
+  //   16: data cache component
+  //   17: execution component
+  //   18: dependency component
 
   // event selector (hardwired, 0 means no event)
   always_comb begin : gen_mhpmevent

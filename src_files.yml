@@ -8,6 +8,7 @@ ibex:
     rtl/ibex_alu.sv,
     rtl/ibex_compressed_decoder.sv,
     rtl/ibex_controller.sv,
+    rtl/topdown_monitor.sv,
     rtl/ibex_cs_registers.sv,
     rtl/ibex_counters.sv,
     rtl/ibex_decoder.sv,
