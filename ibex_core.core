@@ -17,6 +17,7 @@ filesets:
       - lowrisc:dv:dv_fcov_macros
     files:
       - rtl/ibex_alu.sv
+      - rtl/topdown_monitor.sv
       - rtl/ibex_branch_predict.sv
       - rtl/ibex_compressed_decoder.sv
       - rtl/ibex_controller.sv
@@ -185,6 +186,7 @@ targets:
           # RAM primitives wider than 64bit (required for ECC) fail to build in
           # Verilator without increasing the unroll count (see Verilator#1266)
           - "--unroll-count 72"
+          - "--Wno-UNUSEDSIGNAL"
   format:
     filesets:
       - files_rtl

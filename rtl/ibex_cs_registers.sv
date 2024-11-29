@@ -8,7 +8,6 @@
  */
 
 `include "prim_assert.sv"
-
 module ibex_cs_registers #(
   parameter bit                     DbgTriggerEn      = 0,
   parameter int unsigned            DbgHwBreakNum     = 1,
@@ -1285,6 +1284,7 @@ module ibex_cs_registers #(
 
   // additional counters for top-down
   // ================================
+  logic [6-1:0] topdown_incr;
   if (TopDownEnable) begin: gen_topdown_enable
     //   13: base component
     //   14: instruction cache component
@@ -1292,7 +1292,7 @@ module ibex_cs_registers #(
     //   16: data cache component
     //   17: execution component
     //   18: dependency component
-    logic [topdown_monitor_pkg::N_TOPDOWN_COMPS-1:0] topdown_incr;
+    
 
     topdown_monitor #(
       .IDX_ICACHE(1),
@@ -1367,8 +1367,8 @@ module ibex_cs_registers #(
 
     // top-down signal propagation
     if (TopDownEnable) begin : gen_mhpmcounter_incr_topdown
-      mhpmcounter_incr[13+topdown_monitor_pkg::N_TOPDOWN_COMPS-1:13] =
-        gen_topdown_enable.topdown_incr[topdown_monitor_pkg::N_TOPDOWN_COMPS-1:0];
+      mhpmcounter_incr[13+6-1:13] =
+        topdown_incr[6-1:0];
     end
   end
 

@@ -48,7 +48,13 @@ const std::vector<std::string> ibex_counter_names = {
     "Taken Conditional Branches",
     "Compressed Instructions",
     "Multiply Wait",
-    "Divide Wait"};
+    "Divide Wait", 
+    "Base Component", 
+    "ICache Component",
+    "Branch Prediction Component",
+    "Dcache Component",
+    "Execution Component",
+    "Dependency Component"};
 
 static bool has_hpm_counter(int index) {
   // The "cycles" and "instructions retired" counters are special and always
@@ -163,6 +169,20 @@ std::string ibex_pcount_string(bool csv) {
     uint32_t div = 0;
     // asm volatile("csrr 0x320, %02;\n" : "=r"(div));
     pcount_ss << std::fixed << std::setprecision(4) << metrics  << std::endl;
+
+    // new_counter = "Base Component";
+    // pcount_ss << new_counter << separator;
+   
+    // padding = longest_name_length - new_counter.length();
+    // for (int j = 0; j < padding; ++j)
+    //   pcount_ss << ' ';
+    
+    // metrics = ((mhpmcounter_get(3) + mhpmcounter_get(11) + mhpmcounter_get(12))/(mhpmcounter_get(2)*1.0000));
+    // // uint32_t div = 0;
+    // // DEV_READ(0xB8B,div);
+    // uint32_t div = 0;
+    // // asm volatile("csrr 0x320, %02;\n" : "=r"(div));
+    // pcount_ss << std::fixed << std::setprecision(4) << metrics  << std::endl;
 
  }
   return pcount_ss.str();
