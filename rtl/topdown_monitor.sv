@@ -1,12 +1,6 @@
 
-package topdown_monitor_pkg;
 
-  // number of first-level topdown components
-  parameter int N_TOPDOWN_COMPS = 6;
-
-endpackage
-
-module topdown_monitor import topdown_monitor_pkg::*; #(
+module topdown_monitor #(
   parameter IDX_ICACHE = 1,
   parameter IDX_BPRED = 2,
   parameter IDX_DCACHE = 3,
@@ -52,7 +46,7 @@ module topdown_monitor import topdown_monitor_pkg::*; #(
   localparam IDX_DEPENDENCY = 5;
 
   // local wires
-  logic [N_TOPDOWN_COMPS-1:0] events; // pulses for specific events
+  logic [6-1:0] events; // pulses for specific events
   logic mul_wait_prev;
   logic div_wait_prev;
 

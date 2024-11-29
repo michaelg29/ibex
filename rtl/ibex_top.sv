@@ -18,7 +18,7 @@ module ibex_top import ibex_pkg::*; #(
   parameter int unsigned            PMPNumRegions                = 4,
   parameter int unsigned            MHPMCounterNum               = 0,
   parameter int unsigned            MHPMCounterWidth             = 40,
-  parameter bit                     TopDownEnable                = 0,
+  parameter bit                     TopDownEnable                = 1,
   parameter ibex_pkg::pmp_cfg_t     PMPRstCfg[16]                = ibex_pkg::PmpCfgRst,
   parameter logic [33:0]            PMPRstAddr[16]               = ibex_pkg::PmpAddrRst,
   parameter ibex_pkg::pmp_mseccfg_t PMPRstMsecCfg                = ibex_pkg::PmpMseccfgRst,

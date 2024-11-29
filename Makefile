@@ -2,6 +2,10 @@ IBEX_CONFIG ?= opentitan
 
 FUSESOC_CONFIG_OPTS = $(shell ./util/ibex_config.py $(IBEX_CONFIG) fusesoc_opts)
 
+SRC= ../benchmarks
+C_FILES=$(wildcard $(SRC)/*.c)
+C_FILE_NAMES=$(foreach file, $(C_FILES), $(basename $(notdir $(file))))
+
 all: help
 
 .PHONY: help
@@ -125,3 +129,20 @@ clean-sim:
 clean-bm:
 	(cd ./examples/sw/benchmarks/coremark && \
 	rm coremark.bin coremark.vmem coremark.d coremark.o coremark.elf)
+
+.PHONY:compile_benchmark
+compile_benchmark:
+	$(foreach name, $(C_FILE_NAMES), \
+    echo "==================================" && \
+    echo "Running make for $(name)" && \
+    (make -C ../benchmarks/ PROGRAM=$(name) >compile_benchmark.log 2>&1) || true && \
+    echo "Finished make for $(name)" && \
+    echo "==================================";)
+
+	
+.PHONY:run_benchmark
+run_benchmark:
+	$(foreach name, $(C_FILE_NAMES), \
+		echo "Running make for $(name)" && \
+		./build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system [-t] --meminit=ram,$(SRC)/$(name).elf;)
+	

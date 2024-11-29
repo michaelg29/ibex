@@ -8,7 +8,6 @@
  */
 
 `include "prim_assert.sv"
-
 module ibex_cs_registers #(
   parameter bit                     DbgTriggerEn      = 0,
   parameter int unsigned            DbgHwBreakNum     = 1,
@@ -1293,7 +1292,7 @@ module ibex_cs_registers #(
     //   16: data cache component
     //   17: execution component
     //   18: dependency component
-    
+
     ibex_topdown_monitor u_topdown_monitor (
       .clk_i(clk_i),
       .rst_ni(rst_ni),

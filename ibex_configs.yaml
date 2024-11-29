@@ -43,16 +43,16 @@ opentitan:
   RegFile                  : "ibex_pkg::RegFileFF"
   BranchTargetALU          : 1
   WritebackStage           : 1
-  ICache                   : 1
+  ICache                   : 0
   ICacheECC                : 1
   ICacheScramble           : 1
-  BranchPredictor          : 0
+  BranchPredictor          : 1
   DbgTriggerEn             : 1
   SecureIbex               : 1
   PMPEnable                : 1
   PMPGranularity           : 0
   PMPNumRegions            : 16
-  MHPMCounterNum           : 13
+  MHPMCounterNum           : 19
   MHPMCounterWidth         : 32
 
 # Three-stage pipeline with additional branch traget ALU and 1 cycle multiplier
@@ -61,7 +61,7 @@ opentitan:
 # yet fully verified)
 maxperf:
   RV32E                    : 0
-  RV32M                    : "ibex_pkg::RV32MSingleCycle"
+  RV32M                    : "ibex_pkg::RV32MSlow"
   RV32B                    : "ibex_pkg::RV32BNone"
   RegFile                  : "ibex_pkg::RegFileFF"
   BranchTargetALU          : 1
