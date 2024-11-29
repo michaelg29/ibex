@@ -5,6 +5,8 @@ FUSESOC_CONFIG_OPTS = $(shell ./util/ibex_config.py $(IBEX_CONFIG) fusesoc_opts)
 SRC= ../benchmarks
 C_FILES=$(wildcard $(SRC)/*.c)
 C_FILE_NAMES=$(foreach file, $(C_FILES), $(basename $(notdir $(file))))
+ELF_FILES=$(wildcard $(SRC)/*.elf)
+EFL_FILE_NAMES=$(foreach file, $(ELF_FILES), $(basename $(notdir $(file))))
 
 all: help
 
@@ -135,14 +137,20 @@ compile_benchmark:
 	$(foreach name, $(C_FILE_NAMES), \
     echo "==================================" && \
     echo "Running make for $(name)" && \
-    (make -C ../benchmarks/ PROGRAM=$(name) >compile_benchmark.log 2>&1) || true && \
+    (make -C ../benchmarks/ PROGRAM=$(name) >> compile_benchmark.log 2>&1) || true && \
+	grep "Error" compile_benchmark.log > /dev/null && \
+		{ echo "Errors were found during $(name). Check compile_benchmark.log."; } || \
+		{ echo "Finished make for $(name) without errors."; };  \
+	rm compile_benchmark.log && \
     echo "Finished make for $(name)" && \
     echo "==================================";)
 
 	
 .PHONY:run_benchmark
 run_benchmark:
-	$(foreach name, $(C_FILE_NAMES), \
+	$(foreach name, $(EFL_FILE_NAMES), \
+		echo "==================================" && \
 		echo "Running make for $(name)" && \
-		./build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system [-t] --meminit=ram,$(SRC)/$(name).elf;)
+		./build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system [-t] --meminit=ram,$(SRC)/$(name).elf || true && \
+		echo;)
 	

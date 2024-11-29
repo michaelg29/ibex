@@ -1,8 +1,0 @@
-make[1]: Entering directory '/home/prpate/ibex/benchmarks'
-riscv32-unknown-elf-gcc -march=rv32imc -mabi=ilp32 -static -mcmodel=medany -Wall -lc -g -Os -fvisibility=hidden  -nostartfiles -ffreestanding  -MMD -c -I/home/prpate/ibex/ibex/examples/sw/simple_system/common -o symmetric.o symmetric.c
-symmetric.c:3:10: fatal error: riscv-pk/encoding.h: No such file or directory
-    3 | #include <riscv-pk/encoding.h>
-      |          ^~~~~~~~~~~~~~~~~~~~~
-compilation terminated.
-make[1]: *** [/home/prpate/ibex/benchmarks/../ibex/examples/sw/simple_system/common/common.mk:66: symmetric.o] Error 1
-make[1]: Leaving directory '/home/prpate/ibex/benchmarks'
