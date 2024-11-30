@@ -20,6 +20,7 @@ filesets:
       - rtl/ibex_branch_predict.sv
       - rtl/ibex_compressed_decoder.sv
       - rtl/ibex_controller.sv
+      - rtl/ibex_topdown_monitor.sv
       - rtl/ibex_cs_registers.sv
       - rtl/ibex_csr.sv
       - rtl/ibex_counter.sv

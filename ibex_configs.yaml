@@ -18,7 +18,7 @@
 # (4 cycles for mulh), resulting in 2 stall cycles for mul (3 for mulh)
 small:
   RV32E                    : 0
-  RV32M                    : "ibex_pkg::RV32MFast"
+  RV32M                    : "ibex_pkg::RV32MSlow"
   RV32B                    : "ibex_pkg::RV32BNone"
   RegFile                  : "ibex_pkg::RegFileFF"
   BranchTargetALU          : 0
@@ -32,7 +32,7 @@ small:
   PMPEnable                : 0
   PMPGranularity           : 0
   PMPNumRegions            : 4
-  MHPMCounterNum           : 0
+  MHPMCounterNum           : 20
   MHPMCounterWidth         : 40
 
 # Configuration to match that used in the OpenTitan project
