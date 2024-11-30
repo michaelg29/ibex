@@ -1285,6 +1285,7 @@ module ibex_cs_registers #(
 
   // additional counters for top-down
   // ================================
+  logic [5:0] topdown_incr;
   if (TopDownEnable) begin: gen_topdown_enable
     //   13: base component
     //   14: instruction cache component
@@ -1292,49 +1293,36 @@ module ibex_cs_registers #(
     //   16: data cache component
     //   17: execution component
     //   18: dependency component
-    logic [topdown_monitor_pkg::N_TOPDOWN_COMPS-1:0] topdown_incr;
-
-    topdown_monitor #(
-      .IDX_ICACHE(1),
-      .IDX_BPRED(2),
-      .IDX_DCACHE(3),
-      .IDX_EXECUTE(4)
-    ) u_topdown_monitor (
-      // Clock and Reset
+    
+    ibex_topdown_monitor u_topdown_monitor (
       .clk_i(clk_i),
       .rst_ni(rst_ni),
-
-      // Performance Counters
-      .instr_ret_i(instr_ret_i),
-      .instr_ret_compressed_i(instr_ret_compressed_i),
-      .instr_ret_spec_i(instr_ret_spec_i),
-      .instr_ret_compressed_spec_i(instr_ret_compressed_spec_i),
-      .iside_wait_i(iside_wait_i),
-      .jump_i(jump_i),
-      .branch_i(branch_i),
-      .branch_taken_i(branch_taken_i),
-      .mem_load_i(mem_load_i),
-      .mem_store_i(mem_store_i),
-      .dside_wait_i(dside_wait_i),
-      .mul_wait_i(mul_wait_i),
-      .div_wait_i(div_wait_i),
-
-      // Top-down analysis signals
-      .mispredict_i(mispredict_i),
-      .alu_req_i(alu_req_i),
-      .mul_req_i(mul_req_i),
-      .div_req_i(div_req_i),
-      .lsu_req_i(lsu_req_i),
-
-      // Counter increment control
-      .base_comp_incr_o(topdown_incr[0]),
-      .icache_comp_incr_o(topdown_incr[1]),
-      .bpred_comp_incr_o(topdown_incr[2]),
-      .dcache_comp_incr_o(topdown_incr[3]),
-      .ex_comp_incr_o(topdown_incr[4]),
-      .dependency_comp_incr_o(topdown_incr[5])
+      .io_inhibit_i(csr_wdata_int[31]),
+      .io_iside_wait_i(iside_wait_i),
+      .io_dside_wait_i(dside_wait_i),
+      .io_mul_wait_i(mul_wait_i),
+      .io_div_wait_i(div_wait_i),
+      .io_mispredict_i(mispredict_i),
+      .io_alu_req_i_0(alu_req_i),
+      .io_mul_req_i_0(mul_req_i),
+      .io_div_req_i_0(div_req_i),
+      .io_lsu_req_i_0(lsu_req_i),
+      .io_base_comp_incr_o_0(topdown_incr[0]),
+      .io_icache_comp_incr_o_0(topdown_incr[1]),
+      .io_bpred_comp_incr_o_0(topdown_incr[2]),
+      .io_dcache_comp_incr_o_0(topdown_incr[3]),
+      .io_ex_comp_incr_o_0(topdown_incr[4]),
+      .io_dependency_comp_incr_o_0(topdown_incr[5])
     );
-
+  end else begin: gen_topdown_disable
+    assign topdown_incr = '0;
+    wire _unused_ok = &{1'b0,
+                    mispredict_i,
+                    alu_req_i,
+                    mul_req_i,
+                    div_req_i,
+                    lsu_req_i,
+                    1'b0};
   end
 
 
@@ -1367,8 +1355,7 @@ module ibex_cs_registers #(
 
     // top-down signal propagation
     if (TopDownEnable) begin : gen_mhpmcounter_incr_topdown
-      mhpmcounter_incr[13+topdown_monitor_pkg::N_TOPDOWN_COMPS-1:13] =
-        gen_topdown_enable.topdown_incr[topdown_monitor_pkg::N_TOPDOWN_COMPS-1:0];
+      mhpmcounter_incr[13+5:13] = topdown_incr;
     end
   end
 
