@@ -37,7 +37,15 @@
 int main(int argc, char **argv) {
   timer_enable(2000);
 
+  
   uint64_t last_elapsed_time = get_elapsed_time();
+  
+  pcount_enable(0);
+  pcount_reset();
+  pcount_enable(1);
+  double vec1[VECTOR_SIZE] = {};
+  double vec2[VECTOR_SIZE] = {};
+  double result[VECTOR_SIZE] = {};
 
   pcount_enable(0);
   pcount_reset();
