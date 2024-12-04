@@ -81,7 +81,7 @@ module ibex_top_topdown_syn (
     .PMPEnable        ( 1'b0                             ),
     .PMPGranularity   ( 0                                ),
     .PMPNumRegions    ( 4                                ),
-    .MHPMCounterNum   ( 0                                ),
+    .MHPMCounterNum   ( 19                               ),
     .MHPMCounterWidth ( 40                               ),
     .TopDownEnable    ( 1'b1                             ),
     .RV32E            ( 1'b0                             ),
