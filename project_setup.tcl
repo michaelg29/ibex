@@ -10,21 +10,23 @@ namespace eval iv {}
 
 # Design name, typically matches top-level RTL file
 # List of HDL files
-set do_topdown [info exists env(IBEX_TOPDOWN)]
-set do_cpi_tracing [info exists env(IBEX_CPI_TRACE)]
-if { $do_topdown } {
+set version "IBEX_BASE"
+if { [info exists env(IBEX_VERSION)] } {
+  set version $env(IBEX_VERSION)
+}
+if { "$version" == "IBEX_TOPDOWN" } {
   set TOPCELL	ibex_top_topdown_syn
   puts "Running flow in TOPDOWN mode"
-  set gn::VERILOG_LIST [list prim_secded_pkg.sv prim_ram_1p_pkg.sv prim_generic_ram_1p.sv prim_generic_buf.sv prim_assert.sv prim_clock_gating.v prim_flop_macros.sv ibex_pkg.sv ibex_alu.sv ibex_compressed_decoder.sv ibex_controller.sv topdown_monitor.sv ibex_cs_registers.sv ibex_counter.sv ibex_decoder.sv ibex_ex_block.sv ibex_id_stage.sv ibex_if_stage.sv ibex_wb_stage.sv ibex_load_store_unit.sv ibex_multdiv_slow.sv ibex_multdiv_fast.sv ibex_prefetch_buffer.sv ibex_fetch_fifo.sv ibex_pmp.sv ibex_core.sv ibex_register_file_latch.sv ibex_branch_predict.sv ibex_icache.sv ibex_csr.sv ibex_top.sv ibex_top_topdown_syn.sv ]
+  set gn::VERILOG_LIST [list prim_secded_pkg.sv prim_ram_1p_pkg.sv prim_generic_ram_1p.sv prim_generic_buf.sv prim_assert.sv prim_clock_gating.v prim_flop_macros.sv ibex_pkg.sv ibex_alu.sv ibex_compressed_decoder.sv ibex_controller.sv ibex_topdown_monitor.sv ibex_cs_registers.sv ibex_counter.sv ibex_decoder.sv ibex_ex_block.sv ibex_id_stage.sv ibex_if_stage.sv ibex_wb_stage.sv ibex_load_store_unit.sv ibex_multdiv_slow.sv ibex_multdiv_fast.sv ibex_prefetch_buffer.sv ibex_fetch_fifo.sv ibex_pmp.sv ibex_core.sv ibex_register_file_latch.sv ibex_branch_predict.sv ibex_icache.sv ibex_csr.sv ibex_top.sv ibex_top_topdown_syn.sv ]
 
   set gn::HDL_DEFS { \
     "SYNTHESIS" \
     "SYNTHESIS_MEMORY_BLACK_BOXING" \
   }
-} elseif { $do_cpi_tracing } {
+} elseif { "$version" == "IBEX_CPI_TRACE" } {
   set TOPCELL	ibex_top_topdown_syn
   puts "Running flow in CPI_TRACE mode"
-  set gn::VERILOG_LIST [list prim_secded_pkg.sv prim_ram_1p_pkg.sv prim_generic_ram_1p.sv prim_generic_buf.sv prim_assert.sv prim_clock_gating.v prim_flop_macros.sv ibex_pkg.sv ibex_alu.sv ibex_compressed_decoder.sv ibex_controller.sv ibex_tracer_pkg.sv topdown_monitor.sv ibex_cpi_tracer.sv ibex_cs_registers.sv ibex_counter.sv ibex_decoder.sv ibex_ex_block.sv ibex_id_stage.sv ibex_if_stage.sv ibex_wb_stage.sv ibex_load_store_unit.sv ibex_multdiv_slow.sv ibex_multdiv_fast.sv ibex_prefetch_buffer.sv ibex_fetch_fifo.sv ibex_pmp.sv ibex_core.sv ibex_register_file_latch.sv ibex_branch_predict.sv ibex_icache.sv ibex_csr.sv ibex_top.sv ibex_top_topdown_syn.sv ]
+  set gn::VERILOG_LIST [list prim_secded_pkg.sv prim_ram_1p_pkg.sv prim_generic_ram_1p.sv prim_generic_buf.sv prim_assert.sv prim_clock_gating.v prim_flop_macros.sv ibex_pkg.sv ibex_alu.sv ibex_compressed_decoder.sv ibex_controller.sv ibex_tracer_pkg.sv ibex_topdown_monitor.sv ibex_cpi_tracer.sv ibex_cs_registers.sv ibex_counter.sv ibex_decoder.sv ibex_ex_block.sv ibex_id_stage.sv ibex_if_stage.sv ibex_wb_stage.sv ibex_load_store_unit.sv ibex_multdiv_slow.sv ibex_multdiv_fast.sv ibex_prefetch_buffer.sv ibex_fetch_fifo.sv ibex_pmp.sv ibex_core.sv ibex_register_file_latch.sv ibex_branch_predict.sv ibex_icache.sv ibex_csr.sv ibex_top.sv ibex_top_topdown_syn.sv ]
 
   set gn::HDL_DEFS { \
     "SIMULATION_CPI_TRACING" \
@@ -33,8 +35,8 @@ if { $do_topdown } {
   }
 } else {
   set TOPCELL	ibex_top_syn
-  puts "Running flow in base mode"
-  set gn::VERILOG_LIST [list prim_secded_pkg.sv prim_ram_1p_pkg.sv prim_generic_ram_1p.sv prim_generic_buf.sv prim_assert.sv prim_clock_gating.v prim_flop_macros.sv ibex_pkg.sv ibex_alu.sv ibex_compressed_decoder.sv ibex_controller.sv topdown_monitor.sv ibex_cs_registers.sv ibex_counter.sv ibex_decoder.sv ibex_ex_block.sv ibex_id_stage.sv ibex_if_stage.sv ibex_wb_stage.sv ibex_load_store_unit.sv ibex_multdiv_slow.sv ibex_multdiv_fast.sv ibex_prefetch_buffer.sv ibex_fetch_fifo.sv ibex_pmp.sv ibex_core.sv ibex_register_file_latch.sv ibex_branch_predict.sv ibex_icache.sv ibex_csr.sv ibex_top.sv ibex_top_syn.sv ]
+  puts "Running flow in BASE mode"
+  set gn::VERILOG_LIST [list prim_secded_pkg.sv prim_ram_1p_pkg.sv prim_generic_ram_1p.sv prim_generic_buf.sv prim_assert.sv prim_clock_gating.v prim_flop_macros.sv ibex_pkg.sv ibex_alu.sv ibex_compressed_decoder.sv ibex_controller.sv ibex_topdown_monitor.sv ibex_cs_registers.sv ibex_counter.sv ibex_decoder.sv ibex_ex_block.sv ibex_id_stage.sv ibex_if_stage.sv ibex_wb_stage.sv ibex_load_store_unit.sv ibex_multdiv_slow.sv ibex_multdiv_fast.sv ibex_prefetch_buffer.sv ibex_fetch_fifo.sv ibex_pmp.sv ibex_core.sv ibex_register_file_latch.sv ibex_branch_predict.sv ibex_icache.sv ibex_csr.sv ibex_top.sv ibex_top_syn.sv ]
 
   set gn::HDL_DEFS { \
     "SYNTHESIS" \

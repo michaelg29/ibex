@@ -7,7 +7,7 @@ ibex_alu.sv
 ibex_compressed_decoder.sv
 ibex_controller.sv
 ibex_counter.sv
-topdown_monitor.sv
+ibex_topdown_monitor.sv
 ibex_cs_registers.sv
 ibex_decoder.sv
 ibex_ex_block.sv
