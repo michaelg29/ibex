@@ -187,3 +187,47 @@ std::string ibex_pcount_string(bool csv) {
  }
   return pcount_ss.str();
 }
+
+std::string ibex_pcount_string_csv(bool csv) {
+  char separator = csv ? ',' : ':';
+  std::string::size_type longest_name_length;
+
+  std::stringstream pcount_ss;
+  int count;
+
+  for (int i = 0; i < ibex_counter_names.size(); ++i) {
+    if (!has_hpm_counter(i))
+      continue;
+
+    count = mhpmcounter_get(i);
+    pcount_ss << count << separator;
+  }
+
+ if(mhpmcounter_num() >= 3){
+    //new frontend cycles counter
+    std::string new_counter;
+    int padding;
+    double metrics = 0.0;
+
+    pcount_ss << mhpmcounter_get(4) << separator;
+
+    //new backend cycles counter
+    int one = mhpmcounter_get(3);
+    int two = mhpmcounter_get(11);
+    int three = mhpmcounter_get(12);
+
+    metrics = one + two + three;
+    pcount_ss << metrics  << separator;
+
+    //new frontend_cpi counter
+    metrics = (mhpmcounter_get(4)/(mhpmcounter_get(2)*1.0000));
+    pcount_ss << std::fixed << std::setprecision(4) << metrics  << separator;
+
+     //new backend_cpi counter
+    metrics = ((mhpmcounter_get(3) + mhpmcounter_get(11) + mhpmcounter_get(12))/(mhpmcounter_get(2)*1.0000));
+    uint32_t div = 0;
+    // asm volatile("csrr 0x320, %02;\n" : "=r"(div));
+    pcount_ss << std::fixed << std::setprecision(4) << metrics  << ';';
+ }
+  return pcount_ss.str();
+}

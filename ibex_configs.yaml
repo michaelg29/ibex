@@ -38,7 +38,7 @@ small:
 # Configuration to match that used in the OpenTitan project
 opentitan:
   RV32E                    : 0
-  RV32M                    : "ibex_pkg::RV32MSlow"
+  RV32M                    : "ibex_pkg::RV32MSingleCycle"
   RV32B                    : "ibex_pkg::RV32BOTEarlGrey"
   RegFile                  : "ibex_pkg::RegFileFF"
   BranchTargetALU          : 1
