@@ -83,6 +83,7 @@ module ibex_top_syn (
     .PMPNumRegions    ( 4                                ),
     .MHPMCounterNum   ( 0                                ),
     .MHPMCounterWidth ( 40                               ),
+    .TopdownEnable    ( 1'b0                             ),
     .RV32E            ( 1'b0                             ),
     .RV32M            ( ibex_pkg::RV32MSlow              ),
     .RV32B            ( ibex_pkg::RV32BNone              ),
