@@ -8,6 +8,7 @@
 #include <cstdint>
 #include <string>
 #include <vector>
+#define DEV_READ(addr, val) (*((volatile uint32_t *)(addr)))
 
 extern const std::vector<std::string> ibex_counter_names;
 

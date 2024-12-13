@@ -1,6 +1,12 @@
-IBEX_CONFIG ?= small
+IBEX_CONFIG ?= opentitan
 
 FUSESOC_CONFIG_OPTS = $(shell ./util/ibex_config.py $(IBEX_CONFIG) fusesoc_opts)
+
+SRC= ../benchmarks
+C_FILES=$(wildcard $(SRC)/*.c)
+C_FILE_NAMES=$(foreach file, $(C_FILES), $(basename $(notdir $(file))))
+ELF_FILES=$(wildcard $(SRC)/*.elf)
+EFL_FILE_NAMES=$(foreach file, $(ELF_FILES), $(basename $(notdir $(file))))
 
 all: help
 
@@ -49,7 +55,7 @@ $(Vibex_simple_system):
 
 run-simple-system: sw-simple-hello | $(Vibex_simple_system)
 	build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system \
-		--raminit=$(simple-system-program)
+		--raminit=$(simple-system-program) --assert
 
 
 # Arty A7 FPGA example
@@ -115,3 +121,36 @@ test-cfg:
 .PHONY: python-lint
 python-lint:
 	$(MAKE) -C util lint
+
+.PHONY:clean-sim
+clean-sim:
+	(cd ./examples/sw/simple_system/$(PROGRAM) && \
+	rm $(PROGRAM).bin $(PROGRAM).vmem $(PROGRAM).d $(PROGRAM).o $(PROGRAM).elf)
+
+.PHONY:clean-bm
+clean-bm:
+	(cd ./examples/sw/benchmarks/coremark && \
+	rm coremark.bin coremark.vmem coremark.d coremark.o coremark.elf)
+
+.PHONY:compile_benchmark
+compile_benchmark:
+	$(foreach name, $(C_FILE_NAMES), \
+    echo "==================================" && \
+    echo "Running make for $(name)" && \
+    (make -C ../benchmarks/ PROGRAM=$(name) >> compile_benchmark.log 2>&1) || true && \
+	grep "Error" compile_benchmark.log > /dev/null && \
+		{ echo "Errors were found during $(name). Check compile_benchmark.log."; } || \
+		{ echo "Finished make for $(name) without errors."; };  \
+	rm compile_benchmark.log && \
+    echo "Finished make for $(name)" && \
+    echo "==================================";)
+
+	
+.PHONY:run_benchmark
+run_benchmark:
+	$(foreach name, $(EFL_FILE_NAMES), \
+		echo "==================================" && \
+		echo "Running make for $(name)" && \
+		./build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system [-t] --meminit=ram,$(SRC)/$(name).elf || true && \
+		echo;)
+	
