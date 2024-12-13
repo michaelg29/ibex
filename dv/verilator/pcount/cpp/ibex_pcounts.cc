@@ -50,9 +50,9 @@ const std::vector<std::string> ibex_counter_names = {
     "Multiply Wait",
     "Divide Wait", 
     "Base Component", 
-    "ICache Component",
+    "I-$ Component",
     "Branch Prediction Component",
-    "Dcache Component",
+    "D-$ Component",
     "Execution Component",
     "Dependency Component"};
 
@@ -72,6 +72,26 @@ static bool has_hpm_counter(int index) {
   // the MHPMCounterNum parameter that got passed to the
   // ibex_cs_registers module.
   return index < mhpmcounter_num();
+}
+
+std::string cpi_accumulation(char separator, std::string::size_type longest_name_length, std::string new_counter_cycles, std::string new_counter_cpi, double metrics) {
+  std::stringstream pcount_ss;
+  int padding = longest_name_length - new_counter_cycles.length();
+  pcount_ss << new_counter_cycles << separator;
+  for (int j = 0; j < padding; ++j)
+    pcount_ss << ' ';
+  
+  pcount_ss << metrics << std::endl;
+  
+  pcount_ss << new_counter_cpi << separator;
+  
+  padding = longest_name_length - new_counter_cpi.length();
+  for (int j = 0; j < padding; ++j)
+    pcount_ss << ' ';
+  
+  metrics = (metrics/(mhpmcounter_get(2)*1.0000));
+  pcount_ss << std::fixed << std::setprecision(4) << metrics << std::endl;
+  return pcount_ss.str();
 }
 
 std::string ibex_pcount_string(bool csv) {
@@ -110,80 +130,28 @@ std::string ibex_pcount_string(bool csv) {
     // else if(i == 12)
     //    count = pcount_get_mul();
     // else
-      count = mhpmcounter_get(i);
+    count = mhpmcounter_get(i);
     pcount_ss << count << std::endl;
   }
 
- if(mhpmcounter_num() >= 3){
-    //new frontend cycles counter
-    std::string new_counter;
-    int padding;
-    double metrics = 0.0;
-
-    new_counter = "Frontend Cycles";
-    pcount_ss << new_counter << separator;
-   
-    padding = longest_name_length - new_counter.length();
-    for (int j = 0; j < padding; ++j)
-      pcount_ss << ' ';
-
-    pcount_ss << mhpmcounter_get(4) << std::endl;
-
-    //new backend cycles counter
-    new_counter = "Backend Cycles";
-    pcount_ss << new_counter << separator;
-   
-    padding = longest_name_length - new_counter.length();
-    for (int j = 0; j < padding; ++j)
-      pcount_ss << ' ';
-
-    int one = mhpmcounter_get(3);
-    int two = mhpmcounter_get(11);
-    int three = mhpmcounter_get(12);
-
-    metrics = one + two + three;
-    pcount_ss << metrics  << std::endl;
-
-    //new frontend_cpi counter
-    new_counter = "Frontend CPI";
-    pcount_ss << new_counter << separator;
-   
-    padding = longest_name_length - new_counter.length();
-    for (int j = 0; j < padding; ++j)
-      pcount_ss << ' ';
+  if (mhpmcounter_num() >= 3) {
+    // observed CPI
+    pcount_ss << cpi_accumulation(separator, longest_name_length, "Observed Cycles", "Observed CPI", (double)mhpmcounter_get(0));
     
-    metrics = (mhpmcounter_get(4)/(mhpmcounter_get(2)*1.0000));
-    pcount_ss << std::fixed << std::setprecision(4) << metrics  << std::endl;
-
-     //new backend_cpi counter
-    new_counter = "Backend CPI";
-    pcount_ss << new_counter << separator;
-   
-    padding = longest_name_length - new_counter.length();
-    for (int j = 0; j < padding; ++j)
-      pcount_ss << ' ';
+    // frontend cycles counter from standard counters
+    pcount_ss << cpi_accumulation(separator, longest_name_length, "Frontend Cycles (standard)", "Frontend CPI (standard)", (double)mhpmcounter_get(4));
     
-    metrics = ((mhpmcounter_get(3) + mhpmcounter_get(11) + mhpmcounter_get(12))/(mhpmcounter_get(2)*1.0000));
-    // uint32_t div = 0;
-    // DEV_READ(0xB8B,div);
-    uint32_t div = 0;
-    // asm volatile("csrr 0x320, %02;\n" : "=r"(div));
-    pcount_ss << std::fixed << std::setprecision(4) << metrics  << std::endl;
-
-    // new_counter = "Base Component";
-    // pcount_ss << new_counter << separator;
-   
-    // padding = longest_name_length - new_counter.length();
-    // for (int j = 0; j < padding; ++j)
-    //   pcount_ss << ' ';
+    // backend cycles counter from standard counters
+    pcount_ss << cpi_accumulation(separator, longest_name_length, "Backend Cycles (standard)", "Backend CPI (standard)", (double)(mhpmcounter_get(3) + mhpmcounter_get(11) + mhpmcounter_get(12)));
     
-    // metrics = ((mhpmcounter_get(3) + mhpmcounter_get(11) + mhpmcounter_get(12))/(mhpmcounter_get(2)*1.0000));
-    // // uint32_t div = 0;
-    // // DEV_READ(0xB8B,div);
-    // uint32_t div = 0;
-    // // asm volatile("csrr 0x320, %02;\n" : "=r"(div));
-    // pcount_ss << std::fixed << std::setprecision(4) << metrics  << std::endl;
-
- }
+    // frontend cycles counter from new counters
+    pcount_ss << cpi_accumulation(separator, longest_name_length, "Base Cycles (new)", "Base CPI (new)", (double)mhpmcounter_get(13));
+    
+    // frontend cycles counter from new counters
+    pcount_ss << cpi_accumulation(separator, longest_name_length, "Frontend Cycles (new)", "Frontend CPI (new)", (double)(mhpmcounter_get(14) + mhpmcounter_get(15)));
+    
+    // backend cycles counter from new counters
+    pcount_ss << cpi_accumulation(separator, longest_name_length, "Backend Cycles (new)", "Backend CPI (new)", (double)(mhpmcounter_get(16) + mhpmcounter_get(17) + mhpmcounter_get(18)));
+  }
   return pcount_ss.str();
 }
