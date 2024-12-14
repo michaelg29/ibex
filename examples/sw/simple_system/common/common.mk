@@ -27,8 +27,15 @@ OBJDUMP ?= $(CROSS_COMPILE)objdump
 
 LINKER_SCRIPT ?= $(COMMON_DIR)/link.ld
 CRT ?= $(COMMON_DIR)/crt0.S
-CFLAGS ?= -march=$(ARCH) -mabi=ilp32 -static -mcmodel=medany -Wall -lc -g -Os\
-	-fvisibility=hidden  -nostartfiles -ffreestanding $(PROGRAM_CFLAGS)
+#preventing branch optimizations
+# CFLAGS ?= -march=$(ARCH) -mabi=ilp32 -static -mcmodel=medany -Wall -lc -g -Os\
+# 	-fvisibility=hidden  -nostartfiles -ffreestanding $(PROGRAM_CFLAGS)
+# CFLAGS ?= -march=$(ARCH) -mabi=ilp32 -static -mcmodel=medany -Wall -lc -g -Os\	
+# 	-fvisibility=hidden  -nostartfiles -funroll-loops -ffreestanding $(PROGRAM_CFLAGS) 
+
+#with branch optimizations
+CFLAGS ?= -march=$(ARCH) -O3 -mabi=ilp32 -static -mcmodel=medany -Wall -lc -g -Os\
+	-fvisibility=hidden  -nostartfiles -funroll-loops -finline-functions -fno-if-conversion -ffreestanding $(PROGRAM_CFLAGS)
 
 OBJS := ${C_SRCS:.c=.o} ${ASM_SRCS:.S=.o} ${CRT:.S=.o}
 DEPS = $(OBJS:%.o=%.d)

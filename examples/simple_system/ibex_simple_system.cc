@@ -5,7 +5,7 @@
 #include <cassert>
 #include <fstream>
 #include <iostream>
-
+#include <ios>
 #include "Vibex_simple_system__Syms.h"
 #include "ibex_pcounts.h"
 #include "ibex_simple_system.h"
@@ -107,5 +107,7 @@ bool SimpleSystem::Finish() {
   std::ofstream pcount_csv("ibex_simple_system_pcount.csv");
   pcount_csv << ibex_pcount_string(true);
 
+  std::ofstream csv2("output.csv", std::ios::app);
+  csv2<<ibex_pcount_string_csv();
   return true;
 }

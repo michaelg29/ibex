@@ -40,4 +40,6 @@ extern const std::vector<std::string> ibex_counter_names;
  */
 std::string ibex_pcount_string(bool csv);
 
+std::string ibex_pcount_string_csv(bool csv=true);
+
 #endif  // IBEX_PCOUNTS_H_

@@ -8,6 +8,7 @@
 #include <vector>
 #include <svdpi.h>
 #include <iomanip>
+#include <iomanip>
 
 extern "C" {
 extern unsigned int mhpmcounter_num();
@@ -17,6 +18,23 @@ extern unsigned long long mhpmcounter_get(int index);
 #include "ibex_pcounts.h"
 
 // see mhpmcounter_incr signals in rtl/ibex_cs_registers.sv for details
+// const std::vector<std::string, std::vector<int>> ibex_extra_counter = {
+//     // {"Cycles", {0}},
+//     // {"NONE", {1}},
+//     // {"Instructions Retired", {2}},
+//     // {"LSU Busy", {3}},
+//     // {"Fetch Wait", {4}},
+//     // {"Loads", {5}},
+//     // {"Stores", {6}},
+//     // {"Jumps", {7}},
+//     // {"Conditional Branches", {8}},
+//     // {"Taken Conditional Branches", {9}},
+//     // {"Compressed Instructions", {10}},
+//     // {"Multiply Wait", {11}},
+//     // {"Divide Wait", {12}},
+//     {, {4}},
+//     {"Backend Cycles", {3, 11, 12}}
+//     };
 // const std::vector<std::string, std::vector<int>> ibex_extra_counter = {
 //     // {"Cycles", {0}},
 //     // {"NONE", {1}},
@@ -50,9 +68,9 @@ const std::vector<std::string> ibex_counter_names = {
     "Multiply Wait",
     "Divide Wait", 
     "Base Component", 
-    "I-$ Component",
+    "ICache Component",
     "Branch Prediction Component",
-    "D-$ Component",
+    "Dcache Component",
     "Execution Component",
     "Dependency Component"};
 
@@ -113,6 +131,7 @@ std::string ibex_pcount_string(bool csv) {
 
   std::stringstream pcount_ss;
   int count;
+  int count;
   for (int i = 0; i < ibex_counter_names.size(); ++i) {
     if (!has_hpm_counter(i))
       continue;
@@ -130,28 +149,124 @@ std::string ibex_pcount_string(bool csv) {
     // else if(i == 12)
     //    count = pcount_get_mul();
     // else
-    count = mhpmcounter_get(i);
+      count = mhpmcounter_get(i);
     pcount_ss << count << std::endl;
   }
 
-  if (mhpmcounter_num() >= 3) {
-    // observed CPI
-    pcount_ss << cpi_accumulation(separator, longest_name_length, "Observed Cycles", "Observed CPI", (double)mhpmcounter_get(0));
+ if(mhpmcounter_num() >= 3){
+    //new frontend cycles counter
+    std::string new_counter;
+    int padding;
+    double metrics = 0.0;
+
+    new_counter = "Frontend Cycles";
+    pcount_ss << new_counter << separator;
+   
+    padding = longest_name_length - new_counter.length();
+    for (int j = 0; j < padding; ++j)
+      pcount_ss << ' ';
+
+    pcount_ss << mhpmcounter_get(4) << std::endl;
+
+    //new backend cycles counter
+    new_counter = "Backend Cycles";
+    pcount_ss << new_counter << separator;
+   
+    padding = longest_name_length - new_counter.length();
+    for (int j = 0; j < padding; ++j)
+      pcount_ss << ' ';
+
+    int one = mhpmcounter_get(3);
+    int two = mhpmcounter_get(11);
+    int three = mhpmcounter_get(12);
+
+    metrics = one + two + three;
+    pcount_ss << metrics  << std::endl;
+
+    //new frontend_cpi counter
+    new_counter = "Frontend CPI";
+    pcount_ss << new_counter << separator;
+   
+    padding = longest_name_length - new_counter.length();
+    for (int j = 0; j < padding; ++j)
+      pcount_ss << ' ';
     
-    // frontend cycles counter from standard counters
-    pcount_ss << cpi_accumulation(separator, longest_name_length, "Frontend Cycles (standard)", "Frontend CPI (standard)", (double)mhpmcounter_get(4));
+    metrics = (mhpmcounter_get(4)/(mhpmcounter_get(2)*1.0000));
+    pcount_ss << std::fixed << std::setprecision(4) << metrics  << std::endl;
+
+     //new backend_cpi counter
+    new_counter = "Backend CPI";
+    pcount_ss << new_counter << separator;
+   
+    padding = longest_name_length - new_counter.length();
+    for (int j = 0; j < padding; ++j)
+      pcount_ss << ' ';
     
-    // backend cycles counter from standard counters
-    pcount_ss << cpi_accumulation(separator, longest_name_length, "Backend Cycles (standard)", "Backend CPI (standard)", (double)(mhpmcounter_get(3) + mhpmcounter_get(11) + mhpmcounter_get(12)));
+    metrics = ((mhpmcounter_get(3) + mhpmcounter_get(11) + mhpmcounter_get(12))/(mhpmcounter_get(2)*1.0000));
+    // uint32_t div = 0;
+    // DEV_READ(0xB8B,div);
+    uint32_t div = 0;
+    // asm volatile("csrr 0x320, %02;\n" : "=r"(div));
+    pcount_ss << std::fixed << std::setprecision(4) << metrics  << std::endl;
+
+    // new_counter = "Base Component";
+    // pcount_ss << new_counter << separator;
+   
+    // padding = longest_name_length - new_counter.length();
+    // for (int j = 0; j < padding; ++j)
+    //   pcount_ss << ' ';
     
-    // frontend cycles counter from new counters
-    pcount_ss << cpi_accumulation(separator, longest_name_length, "Base Cycles (new)", "Base CPI (new)", (double)mhpmcounter_get(13));
-    
-    // frontend cycles counter from new counters
-    pcount_ss << cpi_accumulation(separator, longest_name_length, "Frontend Cycles (new)", "Frontend CPI (new)", (double)(mhpmcounter_get(14) + mhpmcounter_get(15)));
-    
-    // backend cycles counter from new counters
-    pcount_ss << cpi_accumulation(separator, longest_name_length, "Backend Cycles (new)", "Backend CPI (new)", (double)(mhpmcounter_get(16) + mhpmcounter_get(17) + mhpmcounter_get(18)));
+    // metrics = ((mhpmcounter_get(3) + mhpmcounter_get(11) + mhpmcounter_get(12))/(mhpmcounter_get(2)*1.0000));
+    // // uint32_t div = 0;
+    // // DEV_READ(0xB8B,div);
+    // uint32_t div = 0;
+    // // asm volatile("csrr 0x320, %02;\n" : "=r"(div));
+    // pcount_ss << std::fixed << std::setprecision(4) << metrics  << std::endl;
+
+ }
+  return pcount_ss.str();
+}
+
+std::string ibex_pcount_string_csv(bool csv) {
+  char separator = csv ? ',' : ':';
+  std::string::size_type longest_name_length;
+
+  std::stringstream pcount_ss;
+  int count;
+
+  for (int i = 0; i < ibex_counter_names.size(); ++i) {
+    if (!has_hpm_counter(i))
+      continue;
+
+    count = mhpmcounter_get(i);
+    pcount_ss << count << separator;
   }
+
+ if(mhpmcounter_num() >= 3){
+    //new frontend cycles counter
+    std::string new_counter;
+    int padding;
+    double metrics = 0.0;
+
+    pcount_ss << mhpmcounter_get(4) << separator;
+
+    //new backend cycles counter
+    int one = mhpmcounter_get(3);
+    int two = mhpmcounter_get(11);
+    int three = mhpmcounter_get(12);
+
+    metrics = one + two + three;
+    pcount_ss << metrics  << separator;
+
+    //new frontend_cpi counter
+    metrics = (mhpmcounter_get(4)/(mhpmcounter_get(2)*1.0000));
+    pcount_ss << std::fixed << std::setprecision(4) << metrics  << separator;
+
+     //new backend_cpi counter
+    metrics = ((mhpmcounter_get(3) + mhpmcounter_get(11) + mhpmcounter_get(12))/(mhpmcounter_get(2)*1.0000));
+    uint32_t div = 0;
+    // asm volatile("csrr 0x320, %02;\n" : "=r"(div));
+    pcount_ss << std::fixed << std::setprecision(4) << metrics  << ';';
+ }
   return pcount_ss.str();
 }
