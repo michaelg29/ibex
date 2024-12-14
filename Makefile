@@ -127,17 +127,13 @@ clean-sim:
 	(cd ./examples/sw/simple_system/$(PROGRAM) && \
 	rm $(PROGRAM).bin $(PROGRAM).vmem $(PROGRAM).d $(PROGRAM).o $(PROGRAM).elf)
 
-.PHONY:clean-bm
-clean-bm:
-	(cd ./examples/sw/benchmarks/coremark && \
-	rm coremark.bin coremark.vmem coremark.d coremark.o coremark.elf)
 
 .PHONY:compile_benchmark
 compile_benchmark:
 	$(foreach name, $(C_FILE_NAMES), \
     echo "==================================" && \
     echo "Running make for $(name)" && \
-    (make -C ../benchmarks/ PROGRAM=$(name) >> compile_benchmark.log 2>&1) || true && \
+    (make -C ../benchmarks/ -f ibexconfig.mk PROGRAM=$(name) >> compile_benchmark.log 2>&1) || true && \
 	grep "Error" compile_benchmark.log > /dev/null && \
 		{ echo "Errors were found during $(name). Check compile_benchmark.log."; } || \
 		{ echo "Finished make for $(name) without errors."; };  \
@@ -153,4 +149,9 @@ run_benchmark:
 		echo "Running make for $(name)" && \
 		./build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system [-t] --meminit=ram,$(SRC)/$(name).elf || true && \
 		echo;)
-	
+		
+.PHONY: clean_benchmark
+clean_benchmark:
+	cd ../benchmarks && \
+	rm *.o *.elf *.d *.vmem
+
