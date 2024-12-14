@@ -159,5 +159,5 @@ run_benchmark:
 .PHONY: clean_benchmark
 clean_benchmark:
 	cd ../benchmarks && \
-	rm *.o *.elf *.d *.vmem
+	rm *.o *.elf *.d *.vmem *.bin
 
