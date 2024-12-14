@@ -1292,27 +1292,30 @@ module ibex_cs_registers #(
     //   16: data cache component
     //   17: execution component
     //   18: dependency component
-    
+
     ibex_topdown_monitor u_topdown_monitor (
       .clk_i(clk_i),
       .rst_ni(rst_ni),
-      .io_inhibit_i(csr_wdata_int[31]),
+      .io_inhibit_i(mcountinhibit[31]),
+      //.io_instr_ret_i(instr_ret_i),
       .io_iside_wait_i(iside_wait_i),
       .io_dside_wait_i(dside_wait_i),
       .io_mul_wait_i(mul_wait_i),
       .io_div_wait_i(div_wait_i),
       .io_mispredict_i(mispredict_i),
-      .io_alu_req_i_0(alu_req_i),
-      .io_mul_req_i_0(mul_req_i),
-      .io_div_req_i_0(div_req_i),
-      .io_lsu_req_i_0(lsu_req_i),
-      .io_base_comp_incr_o_0(topdown_incr[0]),
-      .io_icache_comp_incr_o_0(topdown_incr[1]),
-      .io_bpred_comp_incr_o_0(topdown_incr[2]),
-      .io_dcache_comp_incr_o_0(topdown_incr[3]),
-      .io_ex_comp_incr_o_0(topdown_incr[4]),
-      .io_dependency_comp_incr_o_0(topdown_incr[5])
+      .io_alu_req_i(alu_req_i),
+      .io_mul_req_i(mul_req_i),
+      .io_div_req_i(div_req_i),
+      .io_lsu_req_i(lsu_req_i),
+      .io_base_comp_incr_o(topdown_incr[0]),
+      .io_icache_comp_incr_o(topdown_incr[1]),
+      .io_bpred_comp_incr_o(topdown_incr[2]),
+      .io_dcache_comp_incr_o(topdown_incr[3]),
+      .io_ex_comp_incr_o(topdown_incr[4]),
+      .io_dependency_comp_incr_o(topdown_incr[5])
     );
+
+    `ASSERT(IbexTopdownOneHotOutput, topdown_incr == 6'b0 || $onehot(topdown_incr))
   end else begin: gen_topdown_disable
     assign topdown_incr = '0;
     wire _unused_ok = &{1'b0,

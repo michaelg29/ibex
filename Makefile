@@ -8,6 +8,12 @@ C_FILE_NAMES=$(foreach file, $(C_FILES), $(basename $(notdir $(file))))
 ELF_FILES=$(wildcard $(SRC)/*.elf)
 EFL_FILE_NAMES=$(foreach file, $(ELF_FILES), $(basename $(notdir $(file))))
 
+SRC= ../benchmarks
+C_FILES=$(wildcard $(SRC)/*.c)
+C_FILE_NAMES=$(foreach file, $(C_FILES), $(basename $(notdir $(file))))
+ELF_FILES=$(wildcard $(SRC)/*.elf)
+EFL_FILE_NAMES=$(foreach file, $(ELF_FILES), $(basename $(notdir $(file))))
+
 all: help
 
 .PHONY: help
@@ -55,7 +61,7 @@ $(Vibex_simple_system):
 
 run-simple-system: sw-simple-hello | $(Vibex_simple_system)
 	build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system \
-		--raminit=$(simple-system-program)
+		--raminit=$(simple-system-program) --assert
 
 
 # Arty A7 FPGA example

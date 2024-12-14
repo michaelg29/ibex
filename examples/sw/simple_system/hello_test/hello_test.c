@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <stdlib.h>
+#include <string.h>
+
 #include "simple_system_common.h"
 #define NUM_ITERATIONS 1000
 #define VECTOR_SIZE 1000
